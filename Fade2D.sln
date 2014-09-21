@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fade2D", "Fade2D\Fade2D.vcxproj", "{49659BE4-40F9-46DE-9932-C8954F249191}"
 EndProject
@@ -15,20 +15,20 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|Win32.ActiveCfg = Release|x64
-		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|Win32.Build.0 = Release|x64
-		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|x64.ActiveCfg = Release|x64
-		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|x64.Build.0 = Release|x64
-		{49659BE4-40F9-46DE-9932-C8954F249191}.Release|Win32.ActiveCfg = Release|x64
-		{49659BE4-40F9-46DE-9932-C8954F249191}.Release|Win32.Build.0 = Release|x64
+		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|Win32.ActiveCfg = Debug|Win32
+		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|Win32.Build.0 = Debug|Win32
+		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|x64.ActiveCfg = Debug|x64
+		{49659BE4-40F9-46DE-9932-C8954F249191}.Debug|x64.Build.0 = Debug|x64
+		{49659BE4-40F9-46DE-9932-C8954F249191}.Release|Win32.ActiveCfg = Release|Win32
+		{49659BE4-40F9-46DE-9932-C8954F249191}.Release|Win32.Build.0 = Release|Win32
 		{49659BE4-40F9-46DE-9932-C8954F249191}.Release|x64.ActiveCfg = Release|x64
 		{49659BE4-40F9-46DE-9932-C8954F249191}.Release|x64.Build.0 = Release|x64
-		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|Win32.ActiveCfg = Release|x64
-		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|Win32.Build.0 = Release|x64
-		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|x64.ActiveCfg = Release|x64
-		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|x64.Build.0 = Release|x64
-		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Release|Win32.ActiveCfg = Release|x64
-		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Release|Win32.Build.0 = Release|x64
+		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|Win32.Build.0 = Debug|Win32
+		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|x64.ActiveCfg = Debug|x64
+		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Debug|x64.Build.0 = Debug|x64
+		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Release|Win32.ActiveCfg = Release|Win32
+		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Release|Win32.Build.0 = Release|Win32
 		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Release|x64.ActiveCfg = Release|x64
 		{5166DFFA-0BD6-4F86-8CEA-B4E57C7CEDA0}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
