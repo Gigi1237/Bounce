@@ -25,23 +25,20 @@ public:
 	void swapBuffer();
 	GLFWwindow* window;
 	GLuint program;
-	GLuint vao;
 private:
 	
 	GLuint vs;
 	GLuint fs;
-
-	//int* maxEntity;
 };
 
 class FADE2D_EXPORT Entity {
 public:
-	Entity();
-	Entity(GLfloat verteces[], int size);
-	int getId();
+	Entity(GLfloat verteces[], int size, Fade2D lib);
+	int getVboId();
 	void Draw(Fade2D lib);
 private:
-	GLuint id;
+	GLuint vbo_id;
+	GLuint vao_id;
 };
 
 #endif

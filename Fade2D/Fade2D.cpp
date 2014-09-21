@@ -22,10 +22,6 @@ Fade2D::Fade2D(int resX, int resY, char* name)
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-	glEnableVertexAttribArray(0);
-
 	const char* vertexShader =
 		"#version 400\n"
 		"in vec3 vp;"

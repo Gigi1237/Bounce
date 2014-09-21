@@ -1,4 +1,5 @@
 #include "..\Fade2D\Fade2D.h"
+#include <iostream>
 
 int main()
 {
@@ -18,8 +19,12 @@ int main()
 		-0.8f, 1.0f, 0.0f
 	};
 
-	Entity square(ver, sizeof(ver));
-	Entity square1(ver2, sizeof(ver2));
+	Entity square(ver2, sizeof(ver2), graphics);
+	Entity square1(ver, sizeof(ver), graphics);
+
+	//std::cout << square.getVboId();
+	//std::cout << square1.getVboId();
+	//system("PAUSE");
 
 	while (graphics.windowShouldClose())
 	{
