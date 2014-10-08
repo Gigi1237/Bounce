@@ -1,9 +1,9 @@
-#include "Fade2D.h"
+#include "internal.h"
 
 
 
 
-Entity::Entity(GLfloat verteces[], int size, Fade2D lib){
+Entity_INT::Entity_INT(GLfloat verteces[], int size){
 	glGenBuffers(1, &vbo_id);
 	glGenVertexArrays(1, &vao_id);
 	glBindVertexArray(vao_id);
@@ -14,13 +14,13 @@ Entity::Entity(GLfloat verteces[], int size, Fade2D lib){
 	glEnableVertexAttribArray(0);
 };
 
-int Entity::getVboId(){
+int Entity_INT::getVboId(){
 	return vbo_id;
 }
 
-void Entity::Draw(Fade2D lib)
+void Entity_INT::Draw(unsigned int program)
 {
-	glUseProgram(lib.program);
+	glUseProgram(program);
 	glBindVertexArray(vao_id);
 	//glClearColor(0.5, 0.5, 0.5, 1);
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
