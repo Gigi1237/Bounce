@@ -3,7 +3,8 @@
 
 
 
-Entity_INT::Entity_INT(GLfloat verteces[], int size){
+Entity_INT::Entity_INT(GLfloat verteces[], int size, Fade2D_INT* lib){
+	this->lib = lib;
 	glGenBuffers(1, &vbo_id);
 	glGenVertexArrays(1, &vao_id);
 	glBindVertexArray(vao_id);
@@ -18,9 +19,9 @@ int Entity_INT::getVboId(){
 	return vbo_id;
 }
 
-void Entity_INT::Draw(unsigned int program)
+void Entity_INT::Draw()
 {
-	glUseProgram(program);
+	lib->shaderHandler.useProgram();
 	glBindVertexArray(vao_id);
 	//glClearColor(0.5, 0.5, 0.5, 1);
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

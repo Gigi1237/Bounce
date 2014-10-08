@@ -20,7 +20,7 @@ int main()
 	};
 
 	Entity* square = new_entity(ver, sizeof(ver));
-	//Entity square1(ver, sizeof(ver), graphics);
+	Entity* square1 = new_entity(ver2, sizeof(ver));
 
 	//std::cout << square.getVboId();
 	//std::cout << square1.getVboId();
@@ -28,8 +28,8 @@ int main()
 
 	while (graphics->windowShouldClose())
 	{
-	//	square1.Draw(graphics);
-		square->Draw(graphics->getProgramId());
+		square1->Draw();
+		square->Draw();
 		graphics->swapBuffer();
 	}
 

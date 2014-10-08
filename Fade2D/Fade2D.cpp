@@ -1,7 +1,10 @@
 #include "internal.h"
 
+Fade2D_INT *lib;
+
 Fade2D_INT::Fade2D_INT(int resX, int resY, char* name)
 {
+	lib = this;
 	//Start GL context and open windows
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
@@ -20,29 +23,9 @@ Fade2D_INT::Fade2D_INT(int resX, int resY, char* name)
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	const char* vertexShader =
-		"#version 400\n"
-		"in vec3 vp;"
-		"void main () {"
-		"	gl_Position = vec4 (vp, 1.0);"
-		"}";
-	const char* fragmentShader =
-		"#version 400\n"
-		"out vec4 frag_colour;"
-		"void main () {"
-		"	frag_colour = vec4 (0.5, 0.0, 0.5, 1.0);"
-		"}";
-	vs = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vs, 1, &vertexShader, NULL);
-	glCompileShader(vs);
-	fs = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fs, 1, &fragmentShader, NULL);
-	glCompileShader(fs);
-
-	program = glCreateProgram();
-	glAttachShader(program, vs);
-	glAttachShader(program, fs);
-	glLinkProgram(program);
+	shaderHandler = *new ShaderHandler();
+	shaderHandler.currentProgram = shaderHandler.addProgram();
+	shaderHandler.bindProgram(shaderHandler.addShader(vertex, "..\\Fade2D\\vertexShader.txt"), shaderHandler.addShader(fragment, "..\\Fade2D\\fragmentShader.txt"));
 }
 bool Fade2D_INT::init()
 {
@@ -68,10 +51,10 @@ Fade2D* new_fade2d(int resX, int resY, char* name)
 Entity* new_entity(float verteces[], int size)
 
 {
-	return new Entity_INT(verteces, size);
+	return new Entity_INT(verteces, size, lib);
 }
 
 unsigned int Fade2D_INT::getProgramId()
 {
-	return program;
+	return shaderHandler.currentProgram;
 }

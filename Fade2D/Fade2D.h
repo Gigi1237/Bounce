@@ -10,6 +10,7 @@
 
 #define GLEW_STATIC
 
+
 class FADE2D_EXPORT Fade2D {
 public:
 	virtual bool init() = 0;
@@ -21,7 +22,7 @@ public:
 class FADE2D_EXPORT Entity {
 public:
 	virtual int getVboId() = 0;
-	virtual void Draw(unsigned int program) = 0;
+	virtual void Draw() = 0;
 };
 
 extern "C" FADE2D_EXPORT Fade2D* new_fade2d(int resX, int resY, char* name);
