@@ -22,7 +22,7 @@ int main()
 	};
 
 	Entity* square = new_entity(ver, sizeof(ver));
-	Entity* square1 = new_entity(ver2, sizeof(ver));
+	//Entity* square1 = new_entity(ver2, sizeof(ver));
 
 
 	//std::cout << square.getVboId();
@@ -32,21 +32,22 @@ int main()
 
 	while (graphics->windowShouldClose())
 	{
-		if (color)
-		{
-			graphics->prepareScene(0.65f, 0.65f, 0.85f);
-			color = false;
-		}
-		else
-		{
-			graphics->prepareScene();
-			color = true;
-		}
-		//square->move(0, 0.5);
-		square1->Draw();
+		//if (color)
+		//{
+		//	graphics->prepareScene(0.65f, 0.65f, 0.85f);
+		//	color = false;
+		//}
+		//else
+		//{
+		//	graphics->prepareScene();
+		//	color = true;
+		//}
+		graphics->prepareScene();
+		square->move(0, -0.001);
+		//square1->Draw();
 		square->Draw();
 		graphics->swapBuffer();
-		Sleep(255);
+		//Sleep(255);
 	}
 
 	return 0;

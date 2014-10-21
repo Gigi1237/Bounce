@@ -14,6 +14,7 @@ Entity_INT::Entity_INT(GLfloat verteces[], int size, Fade2D_INT* lib){
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(0);
 
+	lib->shaderHandler.useProgram();
 	matrixLocation = glGetUniformLocation(lib->shaderHandler.getProgram(), "matrix");
 	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, matrix);
 };
@@ -25,18 +26,15 @@ int Entity_INT::getVboId()
 
 void Entity_INT::Draw()
 {
-
-	lib->shaderHandler.useProgram();
 	glBindVertexArray(vao_id);
+	//glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, matrix);
+
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
 void  Entity_INT::move(float x, float y)
 {
-	matrix = new float[]{
-		1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		x, y, 0.0f, 1.0f
-	};
+	matrix[12] += x;
+	matrix[13] += y;
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, matrix);
 }
