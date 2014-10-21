@@ -27,10 +27,6 @@ Fade2D_INT::Fade2D_INT(int resX, int resY, char* name)
 	shaderHandler.currentProgram = shaderHandler.addProgram();
 	shaderHandler.bindProgram(shaderHandler.addShader(vertex, "..\\Fade2D\\vertexShader.txt"), shaderHandler.addShader(fragment, "..\\Fade2D\\fragmentShader.txt"));
 }
-bool Fade2D_INT::init()
-{
-	return true;
-}
 
 bool Fade2D_INT::windowShouldClose()
 {

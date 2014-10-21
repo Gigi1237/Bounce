@@ -13,7 +13,6 @@
 
 class FADE2D_EXPORT Fade2D {
 public:
-	virtual bool init() = 0;
 	virtual bool windowShouldClose() = 0;
 	virtual void swapBuffer() = 0;
 	virtual unsigned int getProgramId() = 0;

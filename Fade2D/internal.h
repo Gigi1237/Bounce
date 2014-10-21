@@ -20,7 +20,6 @@ class Fade2D_INT : public Fade2D {
 public:
 	friend class Entity_INT;
 	Fade2D_INT(int resX, int resY, char* name);
-	bool init();
 	bool windowShouldClose();
 	void swapBuffer();
 	unsigned int getProgramId();
