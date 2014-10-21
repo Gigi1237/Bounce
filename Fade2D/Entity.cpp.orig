@@ -3,8 +3,12 @@
 
 
 
+<<<<<<< Updated upstream
 Entity_INT::Entity_INT(GLfloat verteces[], int size, Fade2D_INT* lib){
 	this->lib = lib;
+=======
+Entity::Entity(float verteces[], int size, Fade2D lib){
+>>>>>>> Stashed changes
 	glGenBuffers(1, &vbo_id);
 	glGenVertexArrays(1, &vao_id);
 	glBindVertexArray(vao_id);
@@ -13,30 +17,31 @@ Entity_INT::Entity_INT(GLfloat verteces[], int size, Fade2D_INT* lib){
 	glBufferData(GL_ARRAY_BUFFER, size, verteces, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(0);
-
-	matrixLocation = glGetUniformLocation(lib->shaderHandler.getProgram(), "matrix");
-	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, matrix);
 };
 
-int Entity_INT::getVboId()
-{
+<<<<<<< Updated upstream
+int Entity_INT::getVboId(){
 	return vbo_id;
 }
+=======
+>>>>>>> Stashed changes
 
 void Entity_INT::Draw()
 {
-
 	lib->shaderHandler.useProgram();
 	glBindVertexArray(vao_id);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-void  Entity_INT::move(float x, float y)
+void  Entity::move(float x, float y)
 {
-	matrix = new float[]{
+	float matrix[] = {
 		1.0f, 0.0f, 0.0f, 0.0f,
 		0.0f, 1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f, 1.0f, 0.0f,
 		x, y, 0.0f, 1.0f
 	};
+
+	int matrix_location = glGetUniformLocation(, "matrix");
+	glUniformMatrix4fv(matrix_location, 1, GL_FALSE, matrix);
 }

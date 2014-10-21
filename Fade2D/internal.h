@@ -20,16 +20,15 @@ class Fade2D_INT : public Fade2D {
 public:
 	friend class Entity_INT;
 	Fade2D_INT(int resX, int resY, char* name);
-	bool init();
 	bool windowShouldClose();
 	void swapBuffer();
 	unsigned int getProgramId();
-	GLFWwindow* window;
-	GLuint program;
-protected:
-	ShaderHandler shaderHandler;
-private:
+	void prepareScene();
+	void prepareScene(float R, float G, float B);
 
+	GLFWwindow* window;
+private:
+	ShaderHandler shaderHandler;
 	GLuint vs;
 	GLuint fs;
 };
@@ -39,10 +38,18 @@ public:
 	Entity_INT(GLfloat verteces[], int size, Fade2D_INT* lib);
 	int getVboId();
 	void Draw();
+	void move(float x, float y);
 private:
 	GLuint vbo_id;
 	GLuint vao_id;
 	Fade2D_INT* lib;
+	float* matrix = new float[]{
+		1.0f, 0.0f, 0.0f, 0.0f,
+		0.0f, 1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.0f, 1.0f
+	};
+	int matrixLocation;
 };
 
 #endif

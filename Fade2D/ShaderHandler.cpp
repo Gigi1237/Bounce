@@ -54,7 +54,7 @@ void ShaderHandler::bindProgram(unsigned int program, unsigned int vertexShader,
 	glLinkProgram(programs[program]);
 }
 
-void ShaderHandler::bindProgram( unsigned int vertexShader, unsigned int fragmentShader)
+void ShaderHandler::bindProgram(unsigned int vertexShader, unsigned int fragmentShader)
 {
 	//Attaches vertex and fragment shaders to program
 	glAttachShader(programs[currentProgram], shaders[vertexShader].id);
@@ -66,6 +66,16 @@ void ShaderHandler::bindProgram( unsigned int vertexShader, unsigned int fragmen
 void ShaderHandler::useProgram()
 {
 	glUseProgram(programs[currentProgram]);
+}
+
+unsigned int ShaderHandler::getProgram()
+{
+	return programs[currentProgram];
+}
+
+unsigned int ShaderHandler::getProgram(unsigned int program)
+{
+	return programs[program];
 }
 
 Shader::Shader(shaderType type, const char* shader)

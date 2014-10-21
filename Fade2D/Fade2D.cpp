@@ -27,13 +27,10 @@ Fade2D_INT::Fade2D_INT(int resX, int resY, char* name)
 	shaderHandler.currentProgram = shaderHandler.addProgram();
 	shaderHandler.bindProgram(shaderHandler.addShader(vertex, "..\\Fade2D\\vertexShader.txt"), shaderHandler.addShader(fragment, "..\\Fade2D\\fragmentShader.txt"));
 }
-bool Fade2D_INT::init()
-{
-	return true;
-}
 
 bool Fade2D_INT::windowShouldClose()
 {
+	glfwPollEvents();
 	return !glfwWindowShouldClose(window);
 }
 
@@ -42,19 +39,30 @@ void Fade2D_INT::swapBuffer()
 	glfwSwapBuffers(window);
 }
 
-
-Fade2D* new_fade2d(int resX, int resY, char* name)
+void Fade2D_INT::prepareScene()
 {
-	return new Fade2D_INT(resX, resY, name);
+	glClearColor(0.5, 0.5, 0.5, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-Entity* new_entity(float verteces[], int size)
-
+void Fade2D_INT::prepareScene(float R, float G, float B)
 {
-	return new Entity_INT(verteces, size, lib);
+	glClearColor(R, G, B, 1);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 unsigned int Fade2D_INT::getProgramId()
 {
 	return shaderHandler.currentProgram;
 }
+
+Entity* new_entity(float verteces[], int size)
+{
+	return new Entity_INT(verteces, size, lib);
+}
+Fade2D* new_fade2d(int resX, int resY, char* name)
+{
+	return new Fade2D_INT(resX, resY, name);
+}
+
+

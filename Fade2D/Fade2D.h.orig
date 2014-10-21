@@ -8,21 +8,44 @@
 #ifndef FADE2D_INT
 #define FADE2D_INT
 
+#define GLEW_STATIC
+
 
 class FADE2D_EXPORT Fade2D {
 public:
+<<<<<<< Updated upstream
+	virtual bool init() = 0;
 	virtual bool windowShouldClose() = 0;
 	virtual void swapBuffer() = 0;
 	virtual unsigned int getProgramId() = 0;
-	virtual void prepareScene() = 0;
-	virtual void prepareScene(float R, float G, float B) = 0;
+=======
+	Fade2D(int resX, int resY, char* name);
+	bool windowShouldClose();
+	void swapBuffer();
+	void prepareScene();
+	void prepareScene(float R, float G, float B);
+	GLFWwindow* window;
+	GLuint program;
+private:
+	
+	GLuint vs;
+	GLuint fs;
+>>>>>>> Stashed changes
 };
 
 class FADE2D_EXPORT Entity {
 public:
+<<<<<<< Updated upstream
 	virtual int getVboId() = 0;
 	virtual void Draw() = 0;
-	virtual void move(float x, float y) = 0;
+=======
+	Entity(float verteces[], int size, Fade2D lib);
+	void Draw(Fade2D lib);
+	void move(float x, float y);
+private:
+	GLuint vbo_id;
+	GLuint vao_id;
+>>>>>>> Stashed changes
 };
 
 extern "C" FADE2D_EXPORT Fade2D* new_fade2d(int resX, int resY, char* name);

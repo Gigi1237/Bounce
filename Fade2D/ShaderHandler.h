@@ -32,13 +32,14 @@ public:
 	unsigned int addProgram();
 	void bindProgram(unsigned int program, unsigned int vertexShader, unsigned int fragmentShader);
 	void bindProgram(unsigned int vertexShader, unsigned int fragmentShader);
+	unsigned int getProgram();
+	unsigned int getProgram(unsigned int program);
 	unsigned int currentProgram;
-protected:
-	void useProgram();
 private:
 	const char * readShader(char* path);
 	std::vector<Shader> shaders;
 	std::vector<GLuint> programs;
+	void useProgram();
 };
 
 

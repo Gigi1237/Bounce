@@ -1,11 +1,13 @@
 #include "..\Fade2D\Fade2D.h"
 #include <iostream>
-#include <Windows.h>
-//#include <chrono>
 
 int main()
 {
+<<<<<<< Updated upstream
 	Fade2D *graphics = new_fade2d(800, 600, "test");
+=======
+	Fade2D graphics(800, 600, "Fade2D Test Enviroment");
+>>>>>>> Stashed changes
 
 	float ver[] = {
 		-0.5f, -0.5f, 0.0f,
@@ -21,32 +23,37 @@ int main()
 		-0.8f, 1.0f, 0.0f
 	};
 
+<<<<<<< Updated upstream
 	Entity* square = new_entity(ver, sizeof(ver));
 	Entity* square1 = new_entity(ver2, sizeof(ver));
+=======
+	float matrix[] = { 
+		1.0f, 0.0f, 0.0f, 0.0f, // first column 
+		0.0f, 1.0f, 0.0f, 0.0f, // second column 
+		0.0f, 0.0f, 1.0f, 0.0f, // third column 
+		0.5f, 0.0f, 0.0f, 1.0f // fourth column 
+	};
 
+	Entity square(ver2, sizeof(ver2), graphics);
+	Entity square1(ver, sizeof(ver), graphics);
+>>>>>>> Stashed changes
 
 	//std::cout << square.getVboId();
 	//std::cout << square1.getVboId();
 	//system("PAUSE");
-	bool color = false;
 
 	while (graphics->windowShouldClose())
 	{
-		if (color)
-		{
-			graphics->prepareScene(0.65f, 0.65f, 0.85f);
-			color = false;
-		}
-		else
-		{
-			graphics->prepareScene();
-			color = true;
-		}
-		//square->move(0, 0.5);
+<<<<<<< Updated upstream
 		square1->Draw();
 		square->Draw();
 		graphics->swapBuffer();
-		Sleep(255);
+=======
+		graphics.prepareScene(0.65f, 0.65f, 0.85f);
+		square.Draw(graphics);
+		square1.Draw(graphics);
+		graphics.swapBuffer();
+>>>>>>> Stashed changes
 	}
 
 	return 0;
