@@ -11,6 +11,8 @@
 #include <Windows.h>
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
+#include <glm\glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "ShaderHandler.h"
 #include "Fade2D.h"
 
@@ -22,10 +24,11 @@ public:
 	Fade2D_INT(int resX, int resY, char* name);
 	bool windowShouldClose();
 	void swapBuffer();
-	GLFWwindow* window;
-	GLuint program;
-private:
+	void prepareScene();
+	void prepareScene(float R, float G, float B);
 
+	GLFWwindow* window;
+private:
 	GLuint vs;
 	GLuint fs;
 };
@@ -35,10 +38,12 @@ public:
 	Entity_INT(GLfloat verteces[], int size);
 	int getVboId();
 	void Draw();
+	void move(float x, float y);
 private:
 	GLuint vbo_id;
 	GLuint vao_id;
-	Fade2D_INT* lib;
+	glm::mat4 matrix;
+	int matrixLocation;
 };
 
 #endif

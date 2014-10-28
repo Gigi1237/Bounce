@@ -1,8 +1,6 @@
 #include "internal.h"
 
 
-
-
 Entity_INT::Entity_INT(GLfloat verteces[], int size){
 	glGenBuffers(1, &vbo_id);
 	glGenVertexArrays(1, &vao_id);
@@ -12,18 +10,37 @@ Entity_INT::Entity_INT(GLfloat verteces[], int size){
 	glBufferData(GL_ARRAY_BUFFER, size, verteces, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(0);
+
+	matrix =
+	{
+		1.f, 0.f, 0.f, 0.f,
+		0.f, 1.f, 0.f, 0.f,
+		0.f, 0.f, 1.f, 0.f,
+		0.f, 0.f, 0.f, 1.f
+	};
+
+	ShaderHandler::useProgram();
+	matrixLocation = glGetUniformLocation(ShaderHandler::getProgram(), "matrix");
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 };
 
-int Entity_INT::getVboId(){
+int Entity_INT::getVboId()
+{
 	return vbo_id;
 }
 
 void Entity_INT::Draw()
 {
 	ShaderHandler::useProgram();
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 	glBindVertexArray(vao_id);
-	//glClearColor(0.5, 0.5, 0.5, 1);
-	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glfwPollEvents();
+}
+
+void  Entity_INT::move(float x, float y)
+{
+	matrix[3][0] += x;
+	matrix[3][1] += y;
+	//glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, matrix);
 }

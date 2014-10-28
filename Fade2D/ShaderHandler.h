@@ -26,7 +26,10 @@ unsigned int addShader(shaderType type, char* filePath);
 unsigned int addProgram();
 void bindProgram(unsigned int program, unsigned int vertexShader, unsigned int fragmentShader);
 void bindProgram(unsigned int vertexShader, unsigned int fragmentShader);
+	unsigned int getProgram();
+	unsigned int getProgram(unsigned int program);
 void useProgram();
+	void useProgram();
 
 }
 
