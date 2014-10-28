@@ -15,7 +15,6 @@ class FADE2D_EXPORT Fade2D {
 public:
 	virtual bool windowShouldClose() = 0;
 	virtual void swapBuffer() = 0;
-	virtual unsigned int getProgramId() = 0;
 };
 
 class FADE2D_EXPORT Entity {

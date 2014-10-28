@@ -20,7 +20,7 @@ int main()
 	};
 
 	Entity* square = new_entity(ver, sizeof(ver));
-	Entity* square1 = new_entity(ver2, sizeof(ver));
+	Entity* square1 = new_entity(ver2, sizeof(ver2));
 
 	//std::cout << square.getVboId();
 	//std::cout << square1.getVboId();

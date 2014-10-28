@@ -22,11 +22,8 @@ public:
 	Fade2D_INT(int resX, int resY, char* name);
 	bool windowShouldClose();
 	void swapBuffer();
-	unsigned int getProgramId();
 	GLFWwindow* window;
 	GLuint program;
-protected:
-	ShaderHandler shaderHandler;
 private:
 
 	GLuint vs;
@@ -35,7 +32,7 @@ private:
 
 class Entity_INT : public Entity {
 public:
-	Entity_INT(GLfloat verteces[], int size, Fade2D_INT* lib);
+	Entity_INT(GLfloat verteces[], int size);
 	int getVboId();
 	void Draw();
 private:
