@@ -11,6 +11,8 @@
 #include <Windows.h>
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
+#include <glm\glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include "ShaderHandler.h"
 #include "Fade2D.h"
 
@@ -43,12 +45,7 @@ private:
 	GLuint vbo_id;
 	GLuint vao_id;
 	Fade2D_INT* lib;
-	float* matrix = new float[]{
-		1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f
-	};
+	glm::mat4 matrix;
 	int matrixLocation;
 };
 
