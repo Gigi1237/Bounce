@@ -1,7 +1,7 @@
 //Define Needed headers
 
-#ifndef FADE2D
-#define FADE2D
+#ifndef Fade2D_INT
+#define Fade2D_INT
 
 #define GLEW_STATIC
 #define _CRT_SECURE_NO_WARNINGS
@@ -12,16 +12,17 @@
 #include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <glm\glm.hpp>
+#include <glm\gtc\matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "ShaderHandler.h"
 #include "Fade2D.h"
 
 
 
-class Fade2D_INT : public Fade2D {
+class Fade2D : public IFade2D {
 public:
-	friend class Entity_INT;
-	Fade2D_INT(int resX, int resY, char* name);
+	friend class Entity;
+	Fade2D(int resX, int resY, char* name);
 	bool windowShouldClose();
 	void swapBuffer();
 	void prepareScene();
@@ -33,9 +34,9 @@ private:
 	GLuint fs;
 };
 
-class Entity_INT : public Entity {
+class Entity : public IEntity {
 public:
-	Entity_INT(GLfloat verteces[], int size);
+	Entity(GLfloat verteces[], int size);
 	int getVboId();
 	void Draw();
 	void move(float x, float y);

@@ -5,11 +5,11 @@
 #define FADE2D_EXPORT __declspec(dllimport)
 #endif
 
-#ifndef FADE2D_INT
-#define FADE2D_INT
+#ifndef Fade2D_TEST
+#define Fade2D_TEST
 
 
-class FADE2D_EXPORT Fade2D {
+class FADE2D_EXPORT IFade2D {
 public:
 	virtual bool windowShouldClose() = 0;
 	virtual void swapBuffer() = 0;
@@ -17,14 +17,14 @@ public:
 	virtual void prepareScene(float R, float G, float B) = 0;
 };
 
-class FADE2D_EXPORT Entity {
+class FADE2D_EXPORT IEntity {
 public:
 	virtual int getVboId() = 0;
 	virtual void Draw() = 0;
 	virtual void move(float x, float y) = 0;
 };
 
-extern "C" FADE2D_EXPORT Fade2D* new_fade2d(int resX, int resY, char* name);
-extern "C" FADE2D_EXPORT Entity* new_entity(float verteces[], int size);
+extern "C" FADE2D_EXPORT IFade2D* new_IFade2d(int resX, int resY, char* name);
+extern "C" FADE2D_EXPORT IEntity* new_IEntity(float verteces[], int size);
 
 #endif

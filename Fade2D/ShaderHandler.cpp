@@ -1,5 +1,6 @@
 #include "internal.h"
 
+/// Group of functions dedicated to handling of shaders
 namespace ShaderHandler {
 
 	static const char* readShader(char* path);
@@ -7,6 +8,14 @@ namespace ShaderHandler {
 	static std::vector<GLuint> programs;
 	static unsigned int currentProgram;
 
+
+	///
+	/// Adds shader to the shader vector.
+	///
+	/// @param type shaderType enum which represents the type of the shader
+	/// @param filePath Filepath of the shader
+	///
+	/// @return ID of the shader
 	unsigned int addShader(shaderType type, char* filePath)
 	{
 		//Adds a new shader to the vector and returns it's id
@@ -14,6 +23,95 @@ namespace ShaderHandler {
 		return shaders.capacity() - 1;
 	}
 
+	///
+	/// Adds program to the program vector and sets itself as the current program.
+	///
+	/// @return ID of the program
+	///
+	unsigned int addProgram()
+	{
+		//Adds a new program to the Programs Vertex and returns it's id
+		GLuint i = glCreateProgram();
+		programs.push_back(i);
+		currentProgram = programs.size() - 1;
+		return programs.size() - 1;
+	}
+
+	///
+	/// Attaches shaders to the current program and links it
+	///
+	/// @param vertexShader ID of the vertex shader
+	/// @param fragmentShader ID of the fragment shader
+	///
+	void bindProgram(unsigned int vertexShader, unsigned int fragmentShader)
+	{
+		//Attaches vertex and fragment shaders to program
+		glAttachShader(programs[currentProgram], shaders[vertexShader].id);
+		glAttachShader(programs[currentProgram], shaders[fragmentShader].id);
+		//Links the program
+		glLinkProgram(programs[currentProgram]);
+	}
+
+	///
+	/// Attaches shaders to a program and links it.
+	///
+	/// @param program Program ID
+	/// @param vertexShader ID of the vertex shader
+	/// @param fragmentShader ID of the fragment shader
+	///
+	void bindProgram(unsigned int program, unsigned int vertexShader, unsigned int fragmentShader)
+	{
+		//Attaches vertex and fragment shaders to program
+		glAttachShader(programs[program], shaders[vertexShader].id);
+		glAttachShader(programs[program], shaders[fragmentShader].id);
+		//Links the program
+		glLinkProgram(programs[program]);
+	}
+
+	///
+	/// Sets program that is in use to the current program
+	/// 
+	void useProgram(){
+		glUseProgram(programs[currentProgram]);
+	}
+	///
+	/// Sets program that is in use
+	///
+	/// @param program Program ID
+	///
+	void useProgram(unsigned int program){
+		glUseProgram(programs[program]);
+	}
+
+
+	///
+	/// Gets current program
+	///
+	unsigned int getProgram()
+	{
+		return programs[currentProgram];
+	}
+
+	///
+	/// Gets a program
+	///
+	/// @param program Program ID
+	///
+	unsigned int getProgram(unsigned int program)
+	{
+		return programs[program];
+	}
+
+	Shader::Shader(shaderType type, const char* shader)
+	{
+		//Creates a new shader binds it to it's source and compiles it
+		id = glCreateShader(type);
+		glShaderSource(id, 1, &shader, NULL);
+		glCompileShader(id);
+	}
+
+
+	// Private functions which reads shader from file
 	const char * readShader(char* path)
 	{
 		// Reads the shader into a string
@@ -31,57 +129,4 @@ namespace ShaderHandler {
 		//#endif
 		return ptr;
 	}
-
-	unsigned int addProgram()
-	{
-		//Adds a new program to the Programs Vertex and returns it's id
-		GLuint i = glCreateProgram();
-		std::cout << i;
-		programs.push_back(i);
-		currentProgram = programs.size() - 1;
-		return programs.size() - 1;
-	}
-
-	void bindProgram(unsigned int program, unsigned int vertexShader, unsigned int fragmentShader)
-	{
-		//Attaches vertex and fragment shaders to program
-		glAttachShader(programs[program], shaders[vertexShader].id);
-		glAttachShader(programs[program], shaders[fragmentShader].id);
-		//Links the program
-		glLinkProgram(programs[program]);
-	}
-
-void ShaderHandler::bindProgram(unsigned int vertexShader, unsigned int fragmentShader)
-	{
-		//Attaches vertex and fragment shaders to program
-		glAttachShader(programs[currentProgram], shaders[vertexShader].id);
-		glAttachShader(programs[currentProgram], shaders[fragmentShader].id);
-		//Links the program
-		glLinkProgram(programs[currentProgram]);
-	}
-
-	void useProgram()
-	{
-		glUseProgram(programs[currentProgram]);
-}
-
-unsigned int ShaderHandler::getProgram()
-{
-	return programs[currentProgram];
-}
-
-unsigned int ShaderHandler::getProgram(unsigned int program)
-{
-	return programs[program];
-	}
-
-	Shader::Shader(shaderType type, const char* shader)
-	{
-		//Creates a new shader binds it to it's source and compiles it
-		std::cout << shader;
-		id = glCreateShader(type);
-		glShaderSource(id, 1, &shader, NULL);
-		glCompileShader(id);
-	}
-
 }

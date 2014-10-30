@@ -1,6 +1,7 @@
 #version 400
 in vec3 vp;
-uniform mat4 matrix;
+uniform mat4 proj;
+uniform mat4 transform;
 void main () {
-	gl_Position = matrix * vec4 (vp, 1.0);
+	gl_Position =  proj * transform * vec4 (vp, 1.0);
 };

@@ -1,7 +1,7 @@
 #include "internal.h"
 
 
-Entity_INT::Entity_INT(GLfloat verteces[], int size){
+Entity::Entity(GLfloat verteces[], int size){
 	glGenBuffers(1, &vbo_id);
 	glGenVertexArrays(1, &vao_id);
 	glBindVertexArray(vao_id);
@@ -11,36 +11,31 @@ Entity_INT::Entity_INT(GLfloat verteces[], int size){
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(0);
 
-	matrix =
-	{
-		1.f, 0.f, 0.f, 0.f,
-		0.f, 1.f, 0.f, 0.f,
-		0.f, 0.f, 1.f, 0.f,
-		0.f, 0.f, 0.f, 1.f
-	};
+	matrix = glm::mat4();
 
 	ShaderHandler::useProgram();
-	matrixLocation = glGetUniformLocation(ShaderHandler::getProgram(), "matrix");
+	matrixLocation = glGetUniformLocation(ShaderHandler::getProgram(), "transform");
 	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 };
 
-int Entity_INT::getVboId()
+int Entity::getVboId()
 {
 	return vbo_id;
 }
 
-void Entity_INT::Draw()
+void Entity::Draw()
 {
 	ShaderHandler::useProgram();
-	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 	glBindVertexArray(vao_id);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-void  Entity_INT::move(float x, float y)
+void  Entity::move(float x, float y)
 {
-	matrix[3][0] += x;
-	matrix[3][1] += y;
-	//glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, matrix);
+	//matrix[3][0] += x;
+	//matrix[3][1] += y;
+
+	matrix = glm::translate(matrix, glm::vec3(x, y, 0));
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(matrix));
 }

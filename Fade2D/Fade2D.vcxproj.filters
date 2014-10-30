@@ -38,6 +38,9 @@
     <ClInclude Include="internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="vertexShader.txt">
