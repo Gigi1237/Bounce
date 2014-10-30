@@ -1,6 +1,5 @@
 #include "internal.h"
 
-
 Entity::Entity(GLfloat verteces[], int size){
 	glGenBuffers(1, &vbo_id);
 	glGenVertexArrays(1, &vao_id);

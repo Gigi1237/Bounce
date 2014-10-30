@@ -1,6 +1,12 @@
 #include "internal.h"
 
-
+///
+/// Constructor for Fade2D
+///
+/// @param resX Diagonal resolution of the desired window
+/// @param resY Vertical resolution of the desired window
+/// @param name Name of the desired window
+///
 Fade2D::Fade2D(int resX, int resY, char* name)
 {
 	//Start GL context and open windows
@@ -50,34 +56,49 @@ Fade2D::Fade2D(int resX, int resY, char* name)
 
 }
 
-
+///
+/// Checks if the window should close
+///
 bool Fade2D::windowShouldClose()
 {
 	glfwPollEvents();
 	return !glfwWindowShouldClose(window);
 }
 
+///
+/// Swaps back and front buffers, must be done every scene after rendering
+///
 void Fade2D::swapBuffer()
 {
 	glfwSwapBuffers(window);
 }
 
+///
+/// Prepares the scene for rendering using default color
+///
 void Fade2D::prepareScene()
 {
 	glClearColor(0.5, 0.5, 0.5, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+///
+/// Prepares scene for rendering using a custom color
+///
 void Fade2D::prepareScene(float R, float G, float B)
 {
 	glClearColor(R, G, B, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+
+/// Interface for creating an object of Entity
 IEntity* new_IEntity(float verteces[], int size)
 {
 	return new Entity(verteces, size);
 }
+
+/// Interface for creating an object of Fade2D
 IFade2D* new_IFade2d(int resX, int resY, char* name)
 {
 	return new Fade2D(resX, resY, name);

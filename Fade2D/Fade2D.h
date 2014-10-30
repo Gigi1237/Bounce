@@ -8,7 +8,9 @@
 #ifndef Fade2D_TEST
 #define Fade2D_TEST
 
-
+///
+/// Interface for the Fade2D class
+///
 class FADE2D_EXPORT IFade2D {
 public:
 	virtual bool windowShouldClose() = 0;
@@ -17,6 +19,9 @@ public:
 	virtual void prepareScene(float R, float G, float B) = 0;
 };
 
+///
+/// Interface for the entity class
+///
 class FADE2D_EXPORT IEntity {
 public:
 	virtual int getVboId() = 0;

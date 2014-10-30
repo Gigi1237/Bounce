@@ -18,22 +18,25 @@
 #include "Fade2D.h"
 
 
-
+///
+/// Class that handles most graphics operations
+///
 class Fade2D : public IFade2D {
 public:
-	friend class Entity;
 	Fade2D(int resX, int resY, char* name);
 	bool windowShouldClose();
 	void swapBuffer();
 	void prepareScene();
 	void prepareScene(float R, float G, float B);
-
 	GLFWwindow* window;
 private:
 	GLuint vs;
 	GLuint fs;
 };
 
+///
+/// Class that represents an entity
+///
 class Entity : public IEntity {
 public:
 	Entity(GLfloat verteces[], int size);
