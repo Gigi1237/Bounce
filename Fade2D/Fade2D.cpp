@@ -1,5 +1,7 @@
 #include "internal.h"
 
+static Fade2D *library;
+
 ///
 /// Constructor for Fade2D
 ///
@@ -7,8 +9,7 @@
 /// @param resY Vertical resolution of the desired window
 /// @param name Name of the desired window
 ///
-Fade2D::Fade2D(int resX, int resY, char* name)
-{
+Fade2D::Fade2D(int resX, int resY, char* name){
 	//Start GL context and open windows
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
@@ -26,34 +27,21 @@ Fade2D::Fade2D(int resX, int resY, char* name)
 
 	glewExperimental = GL_TRUE;
 	glewInit();
-	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
 
 	ShaderHandler::addProgram();
-	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
 	ShaderHandler::bindProgram(ShaderHandler::addShader(ShaderHandler::vertex, "..\\Fade2D\\vertexShader.txt"), ShaderHandler::addShader(ShaderHandler::fragment, "..\\Fade2D\\fragmentShader.txt"));
-	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
 	ShaderHandler::useProgram();
-	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
 
-	float x = 0.f;
-	float y = 0.f;
+	glUniformMatrix4fv(
+		glGetUniformLocation(ShaderHandler::getProgram(), "proj"),
+		1,
+		GL_FALSE,
+		//glm::value_ptr(glm::translate(glm::ortho(0.f, 800.0f, 600.0f, 0.f, 10.0f, -10.0f), glm::vec3(-1.f, -1.f, 0.f))));
+		glm::value_ptr(glm::ortho(0.f, (float)resX, (float)resY, 0.f, 10.0f, -10.0f)));
 
-	glm::mat4 Projection = glm::ortho(0.f, 800.0f, 600.0f, 0.f, 10.0f, -10.0f);
-	glm::mat4 View = glm::lookAt(
-		glm::vec3(0, 0, 5), // Camera is at (0,0,5), in World Space
-		glm::vec3(0, 0, 0), // and looks at the origin
-		glm::vec3(0, -1, 0)  // Head is up (set to 0,-1,0 to look upside-down)
-		);
-	glm::mat4 Model = glm::mat4(1.0f);
-	glm::mat4 MVP = Projection * View * Model;
+	this->genBaseObject();
 
-	std::cout << std::endl << "X= " << (MVP * glm::vec4(x, y, 0.f, 0.f))[0] << " Y= " << (MVP * glm::vec4(x, y, 0.f, 0.f))[0];
-	glm::vec4 b = glm::vec4(x, y, 0.f, 0.f) * MVP;
-
-
-	glUniformMatrix4fv(glGetUniformLocation(ShaderHandler::getProgram(), "proj"), 1, GL_FALSE, glm::value_ptr(glm::ortho(0.f, 800.0f, 600.0f, 0.f, 10.0f, -10.0f)));
-	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
-
+	library = this;
 }
 
 ///
@@ -68,16 +56,14 @@ bool Fade2D::windowShouldClose()
 ///
 /// Swaps back and front buffers, must be done every scene after rendering
 ///
-void Fade2D::swapBuffer()
-{
+void Fade2D::swapBuffer(){
 	glfwSwapBuffers(window);
 }
 
 ///
 /// Prepares the scene for rendering using default color
 ///
-void Fade2D::prepareScene()
-{
+void Fade2D::prepareScene(){
 	glClearColor(0.5, 0.5, 0.5, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
@@ -85,23 +71,53 @@ void Fade2D::prepareScene()
 ///
 /// Prepares scene for rendering using a custom color
 ///
-void Fade2D::prepareScene(float R, float G, float B)
-{
+void Fade2D::prepareScene(float R, float G, float B){
 	glClearColor(R, G, B, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 
-/// Interface for creating an object of Entity
-IEntity* new_IEntity(float verteces[], int size)
-{
-	return new Entity(verteces, size);
+void Fade2D::draw(){
+
+	glBindVertexArray(base_vao);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
 
-/// Interface for creating an object of Fade2D
-IFade2D* new_IFade2d(int resX, int resY, char* name)
-{
+void Fade2D::genBaseObject(){
+	glGenBuffers(1, &base_vbo);
+	glGenVertexArrays(1, &base_vao);
+	glBindVertexArray(base_vao);
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, base_vbo);
+	GLfloat verteces[] = {
+		0.f, 1.f, 0.f,
+		0.f, 0.f, 0.f,
+		1.f, 1.f, 0.f,
+		1.f, 0.f, 0.f
+	};
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verteces), verteces, GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+	glEnableVertexAttribArray(0);
+}
+
+/// Interface for creating a Fade2D object
+///
+/// @param resX Horizontal resolution
+/// @param resY Vertical resolution
+/// @param name Name of the window
+///
+IFade2D* new_IFade2d(int resX, int resY, char* name){
 	return new Fade2D(resX, resY, name);
 }
 
-
+/// Interface for creating an object of Entity
+///
+/// @param xLen Lenght of the Entity
+/// @param yLen Height of the Entity
+/// @param xPos Horizontal position of the Entity
+/// @param yPos Vertical position of the Entiy
+///
+IEntity* new_IEntity(float xLen, float yLen, float xPos, float yPos){
+	return new Entity(xLen, yLen, xPos, yPos, library);
+}

@@ -24,12 +24,12 @@ public:
 ///
 class FADE2D_EXPORT IEntity {
 public:
-	virtual int getVboId() = 0;
 	virtual void Draw() = 0;
 	virtual void move(float x, float y) = 0;
+	virtual float* getPosition() = 0;
 };
 
-extern "C" FADE2D_EXPORT IFade2D* new_IFade2d(int resX, int resY, char* name);
-extern "C" FADE2D_EXPORT IEntity* new_IEntity(float verteces[], int size);
+FADE2D_EXPORT IFade2D* new_IFade2d(int resX, int resY, char* name);
+FADE2D_EXPORT IEntity* new_IEntity(float xLen, float yLen, float xPos, float yPos);
 
 #endif

@@ -1,40 +1,36 @@
 #include "internal.h"
 
-Entity::Entity(GLfloat verteces[], int size){
-	glGenBuffers(1, &vbo_id);
-	glGenVertexArrays(1, &vao_id);
-	glBindVertexArray(vao_id);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo_id);
-	glBufferData(GL_ARRAY_BUFFER, size, verteces, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-	glEnableVertexAttribArray(0);
+Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library){
+	pos.x = xPos;
+	pos.y = yPos;
+	modelMatrix = glm::scale(glm::mat4(), glm::vec3(xLen, yLen, 1));
+	transformMatrix = glm::translate(glm::mat4(), glm::vec3(pos, 0));
 
-	matrix = glm::mat4();
+	init(library);
+}
 
+void Entity::Draw(){
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
+	ShaderHandler::useProgram();
+	library->draw();
+
+}
+
+void  Entity::move(float x, float y){
+	pos.x += x;
+	pos.y += y;
+	transformMatrix = glm::translate(glm::mat4(), glm::vec3(pos, 0));
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
+}
+
+float* Entity::getPosition(){
+	return glm::value_ptr(pos);
+}
+
+
+void Entity::init(Fade2D *library){
 	ShaderHandler::useProgram();
 	matrixLocation = glGetUniformLocation(ShaderHandler::getProgram(), "transform");
-	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(matrix));
-};
-
-int Entity::getVboId()
-{
-	return vbo_id;
-}
-
-void Entity::Draw()
-{
-	ShaderHandler::useProgram();
-	glBindVertexArray(vao_id);
-
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-}
-
-void  Entity::move(float x, float y)
-{
-	//matrix[3][0] += x;
-	//matrix[3][1] += y;
-
-	matrix = glm::translate(matrix, glm::vec3(x, y, 0));
-	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
+	this->library = library;
 }

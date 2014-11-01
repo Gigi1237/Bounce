@@ -23,6 +23,7 @@
 ///
 class Fade2D : public IFade2D {
 public:
+	friend class Entity;
 	Fade2D(int resX, int resY, char* name);
 	bool windowShouldClose();
 	void swapBuffer();
@@ -30,8 +31,10 @@ public:
 	void prepareScene(float R, float G, float B);
 	GLFWwindow* window;
 private:
-	GLuint vs;
-	GLuint fs;
+	void draw();
+	void genBaseObject();
+	GLuint base_vbo;
+	GLuint base_vao;
 };
 
 ///
@@ -39,14 +42,17 @@ private:
 ///
 class Entity : public IEntity {
 public:
-	Entity(GLfloat verteces[], int size);
+	Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *libray);
 	int getVboId();
 	void Draw();
 	void move(float x, float y);
+	float* getPosition();
 private:
-	GLuint vbo_id;
-	GLuint vao_id;
-	glm::mat4 matrix;
+	void init(Fade2D *library);
+	Fade2D *library;
+	glm::vec2 pos;
+	glm::mat4 modelMatrix;
+	glm::mat4 transformMatrix;
 	int matrixLocation;
 };
 
