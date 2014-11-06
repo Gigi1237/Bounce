@@ -1,5 +1,15 @@
 #include "internal.h"
 
+
+///
+/// Constructor for the Entity class
+///
+/// @param xLen Width of entity
+/// @param yLen Height of the entity
+/// @param xPos Vertical position of the Entity's top left corner
+/// @param yPos Horizontal position of the Entity's top left corner
+/// @param library Library within which to create the Entity
+///
 Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library){
 	pos.x = xPos;
 	pos.y = yPos;
@@ -9,6 +19,9 @@ Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library){
 	init(library);
 }
 
+///
+/// Draws the entity at it's current position on the sreen
+///
 void Entity::Draw(){
 	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
 	ShaderHandler::useProgram();
@@ -16,6 +29,9 @@ void Entity::Draw(){
 
 }
 
+///
+/// Moves the entity
+///
 void  Entity::move(float x, float y){
 	pos.x += x;
 	pos.y += y;
@@ -23,6 +39,11 @@ void  Entity::move(float x, float y){
 	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
 }
 
+///
+/// Get the entity position
+///
+/// @return Pointer to a C style array with two elements
+///
 float* Entity::getPosition(){
 	return glm::value_ptr(pos);
 }
