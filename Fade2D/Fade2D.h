@@ -8,6 +8,8 @@
 #ifndef Fade2D_TEST
 #define Fade2D_TEST
 
+class IEntity;
+
 ///
 /// Interface for the Fade2D class
 ///
@@ -17,6 +19,7 @@ public:
 	virtual void swapBuffer() = 0;
 	virtual void prepareScene() = 0;
 	virtual void prepareScene(float R, float G, float B) = 0;
+	virtual IEntity *newEntity(float xLen, float yLen, float xPos, float yPos) = 0;
 };
 
 ///
@@ -30,6 +33,5 @@ public:
 };
 
 FADE2D_EXPORT IFade2D* new_IFade2d(int resX, int resY, char* name);
-FADE2D_EXPORT IEntity* new_IEntity(float xLen, float yLen, float xPos, float yPos);
 
 #endif

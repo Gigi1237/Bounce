@@ -1,7 +1,5 @@
 #include "internal.h"
 
-static Fade2D *library;
-
 ///
 /// Constructor for Fade2D
 ///
@@ -40,8 +38,6 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 		glm::value_ptr(glm::ortho(0.f, (float)resX, (float)resY, 0.f, 10.0f, -10.0f)));
 
 	this->genBaseObject();
-
-	library = this;
 }
 
 ///
@@ -76,6 +72,16 @@ void Fade2D::prepareScene(float R, float G, float B){
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
+/// Interface for creating an object of IEntity
+///
+/// @param xLen Lenght of the Entity
+/// @param yLen Height of the Entity
+/// @param xPos Horizontal position of the Entity
+/// @param yPos Vertical position of the Entiy
+///
+IEntity* Fade2D::newEntity(float xLen, float yLen, float xPos, float yPos){
+	return new Entity(xLen, yLen, xPos, yPos, this);
+}
 
 void Fade2D::draw(){
 
@@ -109,15 +115,4 @@ void Fade2D::genBaseObject(){
 ///
 IFade2D* new_IFade2d(int resX, int resY, char* name){
 	return new Fade2D(resX, resY, name);
-}
-
-/// Interface for creating an object of Entity
-///
-/// @param xLen Lenght of the Entity
-/// @param yLen Height of the Entity
-/// @param xPos Horizontal position of the Entity
-/// @param yPos Vertical position of the Entiy
-///
-IEntity* new_IEntity(float xLen, float yLen, float xPos, float yPos){
-	return new Entity(xLen, yLen, xPos, yPos, library);
 }

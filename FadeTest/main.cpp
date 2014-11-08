@@ -11,7 +11,7 @@ int main()
 	IFade2D *graphics = new_IFade2d(RES_X, RES_Y, "test");
 
 
-	IEntity* square = new_IEntity(100.f, 200.f, RES_X / 2, 0);
+	IEntity* square = graphics->newEntity(100.f, 200.f, RES_X / 2, 0);
 	//IEntity* square1 = new_IEntity(500.f, 100.f, 100.f, 200.f);
 	
 	//square->move(RES_X / 2, RES_Y / 2);

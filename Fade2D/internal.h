@@ -29,6 +29,7 @@ public:
 	void swapBuffer();
 	void prepareScene();
 	void prepareScene(float R, float G, float B);
+	IEntity *newEntity(float xLen, float yLen, float xPos, float yPos);
 	GLFWwindow* window;
 private:
 	void draw();
