@@ -142,13 +142,11 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Fade2D.cpp" />
-    <ClCompile Include="log.cpp" />
     <ClCompile Include="ShaderHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fade2D.h" />
     <ClInclude Include="internal.h" />
-    <ClInclude Include="log.h" />
     <ClInclude Include="ShaderHandler.h" />
   </ItemGroup>
   <ItemGroup>
