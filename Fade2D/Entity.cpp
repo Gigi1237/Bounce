@@ -13,8 +13,10 @@
 Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library){
 	pos.x = xPos;
 	pos.y = yPos;
-	modelMatrix = glm::scale(glm::mat4(), glm::vec3(xLen, yLen, 1));
-	transformMatrix = glm::translate(glm::mat4(), glm::vec3(pos, 0));
+	size = glm::vec2(xLen, yLen);
+	scaleMatrix = glm::scale(glm::mat4(), glm::vec3(xLen, yLen, 1));
+	translationMatrix = glm::translate(glm::mat4(), glm::vec3(pos, 0));
+	rotationMatrix = glm::mat4();
 
 	init(library);
 }
@@ -22,11 +24,10 @@ Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library){
 ///
 /// Draws the entity at it's current position on the sreen
 ///
-void Entity::Draw(){
-	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
+void Entity::draw(){
+	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(translationMatrix * rotationMatrix * scaleMatrix));
 	ShaderHandler::useProgram();
 	library->draw();
-
 }
 
 ///
@@ -35,8 +36,16 @@ void Entity::Draw(){
 void  Entity::move(float x, float y){
 	pos.x += x;
 	pos.y += y;
-	transformMatrix = glm::translate(glm::mat4(), glm::vec3(pos, 0));
-	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
+	translationMatrix = glm::translate(translationMatrix, glm::vec3(x, y, 0));
+}
+
+///
+/// Rotates the entity
+///
+void Entity::rotate(float angle)
+{
+	this->angle += angle;
+	rotationMatrix = glm::rotate(rotationMatrix, angle, glm::vec3(0.f, 0.f, 1.f));
 }
 
 ///
@@ -52,6 +61,5 @@ float* Entity::getPosition(){
 void Entity::init(Fade2D *library){
 	ShaderHandler::useProgram();
 	matrixLocation = glGetUniformLocation(ShaderHandler::getProgram(), "transform");
-	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(transformMatrix * modelMatrix));
 	this->library = library;
 }

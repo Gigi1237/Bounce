@@ -45,16 +45,20 @@ class Entity : public IEntity {
 public:
 	Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *libray);
 	int getVboId();
-	void Draw();
+	void draw();
 	void move(float x, float y);
+	void rotate(float angle);
 	float* getPosition();
 private:
 	void init(Fade2D *library);
 	Fade2D *library;
 	glm::vec2 pos;
-	glm::mat4 modelMatrix;
-	glm::mat4 transformMatrix;
+	glm::vec2 size;
+	glm::mat4 scaleMatrix;
+	glm::mat4 translationMatrix;
+	glm::mat4 rotationMatrix;
 	int matrixLocation;
+	float angle;
 };
 
 #endif

@@ -20,11 +20,12 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	window = glfwCreateWindow(resX, resY, name, NULL, NULL);
-	//this->maxEntity = new int[maxEntity];
 	glfwMakeContextCurrent(window);
 
 	glewExperimental = GL_TRUE;
 	glewInit();
+
+	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
 
 	ShaderHandler::addProgram();
 	ShaderHandler::bindProgram(ShaderHandler::addShader(ShaderHandler::vertex, "..\\Fade2D\\vertexShader.txt"), ShaderHandler::addShader(ShaderHandler::fragment, "..\\Fade2D\\fragmentShader.txt"));
@@ -95,11 +96,18 @@ void Fade2D::genBaseObject(){
 	glBindVertexArray(base_vao);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, base_vbo);
+	//GLfloat verteces[] = {
+	//	0.f, 1.f, 0.f,
+	//	0.f, 0.f, 0.f,
+	//	1.f, 1.f, 0.f,
+	//	1.f, 0.f, 0.f
+	//};
+
 	GLfloat verteces[] = {
-		0.f, 1.f, 0.f,
-		0.f, 0.f, 0.f,
-		1.f, 1.f, 0.f,
-		1.f, 0.f, 0.f
+		-0.5f, 0.5f, 0.f,
+		-0.5f, -0.5f, 0.f,
+		0.5f, 0.5f, 0.f,
+		0.5f, -0.5f, 0.f
 	};
 
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verteces), verteces, GL_STATIC_DRAW);

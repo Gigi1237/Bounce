@@ -27,8 +27,9 @@ public:
 ///
 class FADE2D_EXPORT IEntity {
 public:
-	virtual void Draw() = 0;
+	virtual void draw() = 0;
 	virtual void move(float x, float y) = 0;
+	virtual void rotate(float angle) = 0;
 	virtual float* getPosition() = 0;
 };
 
