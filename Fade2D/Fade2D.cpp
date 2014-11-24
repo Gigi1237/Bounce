@@ -14,8 +14,8 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 		exit(EXIT_FAILURE);
 	}
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
@@ -35,8 +35,7 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 		glGetUniformLocation(ShaderHandler::getProgram(), "proj"),
 		1,
 		GL_FALSE,
-		//glm::value_ptr(glm::translate(glm::ortho(0.f, 800.0f, 600.0f, 0.f, 10.0f, -10.0f), glm::vec3(-1.f, -1.f, 0.f))));
-		glm::value_ptr(glm::ortho(0.f, (float)resX, (float)resY, 0.f, 10.0f, -10.0f)));
+		glm::value_ptr(glm::ortho(0.f, (float)resX, (float)resY, 0.f, 1.f, -1.f)));
 
 	this->genBaseObject();
 }
@@ -80,8 +79,8 @@ void Fade2D::prepareScene(float R, float G, float B){
 /// @param xPos Horizontal position of the Entity
 /// @param yPos Vertical position of the Entiy
 ///
-IEntity* Fade2D::newEntity(float xLen, float yLen, float xPos, float yPos){
-	return new Entity(xLen, yLen, xPos, yPos, this);
+IEntity* Fade2D::newEntity(float xLen, float yLen, float xPos, float yPos, float angle){
+	return new Entity(xLen, yLen, xPos, yPos, this, angle);
 }
 
 void Fade2D::draw(){

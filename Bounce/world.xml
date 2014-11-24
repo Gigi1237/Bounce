@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<world name="TestLevel">
+  <gameObject>
+    <position x="100.0" y="100.0"/>
+    <size x="100.0" y="100.0"/>
+  </gameObject>
+  <gameObject>
+    <position x="550.0" y="500.0"/>
+    <size x="70.0" y="50.0"/>
+  </gameObject>
+</world>

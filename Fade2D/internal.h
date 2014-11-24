@@ -29,7 +29,7 @@ public:
 	void swapBuffer();
 	void prepareScene();
 	void prepareScene(float R, float G, float B);
-	IEntity *newEntity(float xLen, float yLen, float xPos, float yPos);
+	IEntity *newEntity(float xLen, float yLen, float xPos, float yPos, float angle = 0);
 	GLFWwindow* window;
 private:
 	void draw();
@@ -43,11 +43,13 @@ private:
 ///
 class Entity : public IEntity {
 public:
-	Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *libray);
+	Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *libray, float angle = 0);
 	int getVboId();
 	void draw();
 	void move(float x, float y);
+	void setPos(float x, float y);
 	void rotate(float angle);
+	void setAngle(float angle);
 	float* getPosition();
 private:
 	void init(Fade2D *library);
