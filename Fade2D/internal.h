@@ -6,16 +6,20 @@
 #define GLEW_STATIC
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <Windows.h>
-#include <GL\glew.h>
+#include "basic.h"
 #include <GLFW\glfw3.h>
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "ShaderHandler.h"
 #include "Fade2D.h"
+#include "Texture.h"
+
+#ifdef _DEBUG
+#define SHADERPATH "..\\Fade2D\\Shaders\\"
+#else
+#define SHADERPATH "Resources\\Shaders\\"
+#endif
 
 
 ///
@@ -29,7 +33,7 @@ public:
 	void swapBuffer();
 	void prepareScene();
 	void prepareScene(float R, float G, float B);
-	IEntity *newEntity(float xLen, float yLen, float xPos, float yPos, float angle = 0);
+	IEntity *newEntity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, float angle = 0);
 	GLFWwindow* window;
 private:
 	void draw();
@@ -43,7 +47,7 @@ private:
 ///
 class Entity : public IEntity {
 public:
-	Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *libray, float angle = 0);
+	Entity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, Fade2D *libray, float angle = 0);
 	int getVboId();
 	void draw();
 	void move(float x, float y);
@@ -54,6 +58,7 @@ public:
 private:
 	void init(Fade2D *library);
 	Fade2D *library;
+	Texture *texture;
 	glm::vec2 pos;
 	glm::vec2 size;
 	glm::mat4 scaleMatrix;

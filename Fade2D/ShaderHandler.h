@@ -30,7 +30,6 @@ unsigned int getProgram();
 unsigned int getProgram(unsigned int program);
 void useProgram();
 void useProgram(unsigned int program);
-
 }
 
 #endif

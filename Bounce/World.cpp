@@ -6,7 +6,7 @@ World::World()
 {
 }
 
-World::World(IFade2D* lib, std::string xmlPath)
+World::World(IFade2D* lib, std::string xmlPath, std::string texturePath)
 {
 	using namespace rapidxml;
 	rapidxml::file<> xmlFile(xmlPath.c_str());
@@ -22,13 +22,19 @@ World::World(IFade2D* lib, std::string xmlPath)
 {
 		xml_node<> *position = gameObject->first_node("position");
 		xml_node<> *size = gameObject->first_node("size");
+		xml_node<> *texture = gameObject->first_node("texture");
 		if (position != NULL && size != NULL){
-			float posx = atof(position->first_attribute("x")->value());
-			float posy = atof(position->first_attribute("y")->value());
-			float sx = atof(size->first_attribute("x")->value());
-			float sy = atof(size->first_attribute("y")->value());
-			worldObjects.push_back(lib->newEntity(sx, sy, posx, posy));
-
+			float posx = (float)atof(position->first_attribute("x")->value());
+			float posy = (float)atof(position->first_attribute("y")->value());
+			float sx = (float)atof(size->first_attribute("x")->value());
+			float sy = (float)atof(size->first_attribute("y")->value());
+			if (texture != NULL)
+			{
+				std::string textureAttrib = texture->first_attribute("name")->value();
+				worldObjects.push_back(lib->newEntity(sx, sy, posx, posy, texturePath + textureAttrib));
+			}
+			else
+				worldObjects.push_back(lib->newEntity(sx, sy, posx, posy, texturePath+DEFAULT_TEXTURE));
 		}
 		gameObject = gameObject->next_sibling("gameObject");
 	}

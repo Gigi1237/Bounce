@@ -10,7 +10,7 @@
 /// @param yPos Horizontal position of the Entity's top left corner
 /// @param library Library within which to create the Entity
 ///
-Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library, float angle){
+Entity::Entity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, Fade2D *library, float angle){
 	pos.x = xPos;
 	pos.y = yPos;
 	this->angle = angle;
@@ -18,6 +18,8 @@ Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library, 
 	scaleMatrix = glm::scale(glm::mat4(), glm::vec3(xLen, yLen, 1));
 	translationMatrix = glm::translate(glm::mat4(), glm::vec3(pos, 0));
 	rotationMatrix = glm::rotate(glm::mat4(), angle, glm::vec3(0.f, 0.f, 1.f));
+
+	this->texture = new Texture(texturePath);
 
 	init(library);
 }
@@ -28,6 +30,7 @@ Entity::Entity(float xLen, float yLen, float xPos, float yPos, Fade2D *library, 
 void Entity::draw(){
 	glUniformMatrix4fv(matrixLocation, 1, GL_FALSE, glm::value_ptr(translationMatrix * rotationMatrix * scaleMatrix));
 	ShaderHandler::useProgram();
+	texture->Bind();
 	library->draw();
 }
 

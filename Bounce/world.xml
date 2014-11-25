@@ -7,5 +7,6 @@
   <gameObject>
     <position x="550.0" y="500.0"/>
     <size x="70.0" y="50.0"/>
+    <texture name="circle.png"/>
   </gameObject>
 </world>

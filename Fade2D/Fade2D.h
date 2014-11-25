@@ -10,6 +10,8 @@
 
 class IEntity;
 
+#include <string>
+
 ///
 /// Interface for the Fade2D class
 ///
@@ -19,7 +21,7 @@ public:
 	virtual void swapBuffer() = 0;
 	virtual void prepareScene() = 0;
 	virtual void prepareScene(float R, float G, float B) = 0;
-	virtual IEntity *newEntity(float xLen, float yLen, float xPos, float yPos, float angle = 0) = 0;
+	virtual IEntity *newEntity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, float angle = 0) = 0;
 };
 
 ///

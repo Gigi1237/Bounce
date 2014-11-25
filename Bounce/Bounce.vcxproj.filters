@@ -35,4 +35,15 @@
       <Filter>Resource Files</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\Textures\default.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\circle.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\rotation.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

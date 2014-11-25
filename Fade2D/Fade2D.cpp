@@ -14,21 +14,27 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 		exit(EXIT_FAILURE);
 	}
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_SAMPLES, 16);
 
 	window = glfwCreateWindow(resX, resY, name, NULL, NULL);
 	glfwMakeContextCurrent(window);
 
+
 	glewExperimental = GL_TRUE;
 	glewInit();
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_MULTISAMPLE);
 
 	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
 
 	ShaderHandler::addProgram();
-	ShaderHandler::bindProgram(ShaderHandler::addShader(ShaderHandler::vertex, "..\\Fade2D\\vertexShader.txt"), ShaderHandler::addShader(ShaderHandler::fragment, "..\\Fade2D\\fragmentShader.txt"));
+	ShaderHandler::bindProgram(ShaderHandler::addShader(ShaderHandler::vertex, SHADERPATH"vertexShader.txt"), ShaderHandler::addShader(ShaderHandler::fragment, SHADERPATH"fragmentShader.txt"));
 	ShaderHandler::useProgram();
 
 	glUniformMatrix4fv(
@@ -79,8 +85,8 @@ void Fade2D::prepareScene(float R, float G, float B){
 /// @param xPos Horizontal position of the Entity
 /// @param yPos Vertical position of the Entiy
 ///
-IEntity* Fade2D::newEntity(float xLen, float yLen, float xPos, float yPos, float angle){
-	return new Entity(xLen, yLen, xPos, yPos, this, angle);
+IEntity* Fade2D::newEntity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, float angle){
+	return new Entity(xLen, yLen, xPos, yPos, texturePath, this, angle);
 }
 
 void Fade2D::draw(){
