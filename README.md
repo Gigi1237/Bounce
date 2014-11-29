@@ -1,3 +1,3 @@
-Fade2D
+Bounce
 ======
-A 2D graphics library based on OpenGL and GLFW
+A physics based 2D game
