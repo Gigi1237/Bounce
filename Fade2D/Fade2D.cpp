@@ -31,7 +31,7 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_MULTISAMPLE);
 
-	std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
+	//std::cout << std::endl << "GLError: " << gluErrorString(glGetError()) << std::endl;
 
 	ShaderHandler::addProgram();
 	ShaderHandler::bindProgram(ShaderHandler::addShader(ShaderHandler::vertex, SHADERPATH"vertexShader.txt"), ShaderHandler::addShader(ShaderHandler::fragment, SHADERPATH"fragmentShader.txt"));

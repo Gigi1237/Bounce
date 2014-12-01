@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <world name="TestLevel">
-  <gameObject>
-    <position x="100.0" y="100.0"/>
-    <size x="100.0" y="100.0"/>
-  </gameObject>
-  <gameObject>
-    <position x="550.0" y="500.0"/>
-    <size x="70.0" y="50.0"/>
-    <texture name="circle.png"/>
-  </gameObject>
+  <Object>
+   <position x="640.0" y="360.0"/>
+    <size x="1280" y="720.0"/>
+    <texture name="background.png"/>
+  </Object>
+  <Object>
+    <position x="640.0" y="650.0"/>
+    <size x="63.0" y="63.0"/>
+    <texture name="UI\\play.png"/>
+  </Object>
 </world>

@@ -9,9 +9,9 @@
 #define TEXTURE_PATH "Resources\\Textures\\"
 #endif
 
-#include "../Fade2D/Fade2D.h"
 #include <vector>
 #include <fstream>
 #include "World.h"
+#include "Object.h"
 
 #endif

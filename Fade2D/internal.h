@@ -48,7 +48,6 @@ private:
 class Entity : public IEntity {
 public:
 	Entity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, Fade2D *libray, float angle = 0);
-	int getVboId();
 	void draw();
 	void move(float x, float y);
 	void setPos(float x, float y);
