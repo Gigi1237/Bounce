@@ -109,7 +109,6 @@ namespace ShaderHandler {
 		glShaderSource(id, 1, &shader, NULL);
 		glCompileShader(id);
 
-		GLint b;
 		GLint length;
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 		GLchar* log = (GLchar*)malloc(length);
