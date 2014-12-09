@@ -47,8 +47,8 @@ void  Entity::move(float x, float y){
 /// Move entity to position
 ///
 void Entity::setPos(float x, float y){
-	pos.x += x;
-	pos.y += y;
+	pos.x = x;
+	pos.y = y;
 	translationMatrix = glm::translate(glm::mat4(), glm::vec3(x, y, 0));
 }
 
