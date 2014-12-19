@@ -1,5 +1,4 @@
-#ifndef BOUNCE_H
-#define BOUNCE_H
+#pragma once
 
 #ifdef _DEBUG
 #define XML_PATH "..\\Bounce\\"
@@ -13,5 +12,3 @@
 #include <fstream>
 #include "World.h"
 #include "Object.h"
-
-#endif

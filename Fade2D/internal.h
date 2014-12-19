@@ -33,6 +33,7 @@ public:
 	void swapBuffer();
 	void prepareScene();
 	void prepareScene(float R, float G, float B);
+	int* getWindowSize();
 	IEntity *newEntity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, float angle = 0);
 	GLFWwindow* window;
 private:
@@ -40,6 +41,8 @@ private:
 	void genBaseObject();
 	GLuint base_vbo;
 	GLuint base_vao;
+	int resX;
+	int resY;
 };
 
 ///
@@ -54,6 +57,8 @@ public:
 	void rotate(float angle);
 	void setAngle(float angle);
 	float* getPosition();
+	float* getSize() { return glm::value_ptr(size); }
+	float getAngle() { return angle; }
 private:
 	void init(Fade2D *library);
 	Fade2D *library;

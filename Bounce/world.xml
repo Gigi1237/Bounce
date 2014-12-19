@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <world name="TestLevel">
-  <Object>
+  <PlayerObject>
+    <position x="616.0" y="75"/>
+    <size x="63.0" y="63.0"/>
+    <texture name="ball_red.png"/>
+  </PlayerObject>
+  <Background>
    <position x="640.0" y="360.0"/>
     <size x="1280" y="720.0"/>
     <texture name="background.png"/>
-  </Object>
+  </Background>
   <Object>
-    <position x="640.0" y="650.0"/>
-    <size x="63.0" y="63.0"/>
-    <texture name="UI\\play.png"/>
+    <position x="616.0" y="540"/>
+    <size x="208.0" y="51.0"/>
+    <angle>0</angle>
+    <texture name="Platforms\\Grass_Tile_Half_Round-01.png"/>
   </Object>
 </world>

@@ -24,6 +24,9 @@
     <ClCompile Include="Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="vec2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vec2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -45,13 +51,10 @@
     <Image Include="..\Resources\Textures\default.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="..\Resources\Textures\circle.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\Resources\Textures\rotation.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="..\Resources\Textures\UI\play.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\Resources\Textures\Platforms\Grass_Tile_Half_Round-01.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

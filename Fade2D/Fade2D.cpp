@@ -44,6 +44,9 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 		glm::value_ptr(glm::ortho(0.f, (float)resX, (float)resY, 0.f, 1.f, -1.f)));
 
 	this->genBaseObject();
+
+	this->resX = resX;
+	this->resY = resY;
 }
 
 ///
@@ -118,6 +121,12 @@ void Fade2D::genBaseObject(){
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verteces), verteces, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 	glEnableVertexAttribArray(0);
+}
+
+int* Fade2D::getWindowSize()
+{
+	static int res[] = { resX, resY };
+	return res;
 }
 
 /// Interface for creating a Fade2D object
