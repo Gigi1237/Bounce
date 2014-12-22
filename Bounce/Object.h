@@ -46,7 +46,6 @@ struct BoundingCircle
 class Object
 {
 public:
-	//Object(IEntity* baseEntity);
 	Object(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle = 0.f);
 	~Object();
 	void draw();
@@ -62,14 +61,14 @@ protected:
 class PlayerObject : public Object
 {
 public:
-	//PlayerObject(IEntity* baseEntity);
 	PlayerObject::PlayerObject(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle = 0.f);
 	void move(vec2 mov);
 	void moveTo(vec2 pos);
-	void update(vec2 speed, std::vector<Object> worldObjects);
+	void update(vec2 accel, double timeStep, std::vector<Object> worldObjects);
 	BoundingCircle boundingCircle;
 private:
 	float radius;
+	vec2 speed;
 	vec2 desiredPos;
 };
 
@@ -79,4 +78,4 @@ public:
 	Background(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle = 0.f);
 };
 
-bool checkCollision(BoundingBox boundingBox, BoundingCircle boundingCircle);
+vec2 checkCollision(BoundingBox boundingBox, BoundingCircle boundingCircle);

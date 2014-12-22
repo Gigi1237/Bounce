@@ -18,7 +18,7 @@ void Object::draw()
 	entity->draw();
 }
 
-PlayerObject::PlayerObject(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle) : Object(lib, Len, Pos, texturePath, angle), desiredPos(Pos), boundingCircle(Pos, Len.x / 2)
+PlayerObject::PlayerObject(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle) : Object(lib, Len, Pos, texturePath, angle), desiredPos(Pos), boundingCircle(Pos, Len.x / 2), speed(0.f, 0.f)
 {
 	radius = Len.x / 2;
 }
@@ -33,15 +33,18 @@ void PlayerObject::moveTo(vec2 pos)
 	desiredPos = pos;
 }
 
-void PlayerObject::update(vec2 speed, std::vector<Object> worldObjects)
+void PlayerObject::update(vec2 accel, double timeStep, std::vector<Object> worldObjects)
 {
+	speed += accel * (float)timeStep;
 	desiredPos += speed;
 	boundingCircle.center = desiredPos;
 	bool collide = false;
 	for (auto &object : worldObjects)
 	{
-		if (checkCollision(object.boundingBox, boundingCircle)){
+		vec2 collisionVec = checkCollision(object.boundingBox, boundingCircle);
+		if (collisionVec != vec2(0.f, 0.f)){
 			collide = true;
+			speed = speed - (collisionVec * dotProduct(speed, collisionVec)) * 2;
 		}
 	}
 	if (!collide){
@@ -51,6 +54,16 @@ void PlayerObject::update(vec2 speed, std::vector<Object> worldObjects)
 	else{
 		desiredPos = position;
 		boundingCircle.center = position;
+	}
+
+	if (!isOnScreen(vec2(1280, 720), boundingCircle.center))
+	{
+		vec2 a(600, 75);
+		entity->setPos(a.x, a.y);
+		position = a;
+		desiredPos = position;
+		boundingCircle = *new BoundingCircle(position, size.x / 2);
+		speed = vec2(0, 0);
 	}
 }
 
@@ -68,13 +81,13 @@ bool lineCircleCollision(vec2 A, vec2 B, BoundingCircle circle)
 		return false;
 	}
 
-	double dl = (d.x * d.x + d.y * d.y);
-	double t = ((circle.center.x - A.x) * d.x + (circle.center.y - A.y) * d.y) / dl;
+	float dl = (d.x * d.x + d.y * d.y);
+	float t = ((circle.center.x - A.x) * d.x + (circle.center.y - A.y) * d.y) / dl;
 
 	// point on a line nearest to circle center
 	vec2 nearest(A.x + t * d.x, A.y + t * d.y);
 
-	double dist = distance(nearest, circle.center);
+	float dist = distance(nearest, circle.center);
 
 	if (dist == circle.radius)
 	{
@@ -96,7 +109,7 @@ bool lineCircleCollision(vec2 A, vec2 B, BoundingCircle circle)
 
 		// intersection point nearest to A
 		double t1 = t - dt;
-		vec2 i1X(A.x + t1 * d.x, A.y + t1 * d.y);
+		vec2 i1X(A.x + (float)t1 * d.x, A.y + (float)t1 * d.y);
 		if (t1 < 0 || t1 > 1)
 		{
 			// intersection point is not actually within line segment
@@ -105,7 +118,7 @@ bool lineCircleCollision(vec2 A, vec2 B, BoundingCircle circle)
 
 		// intersection point farthest from A
 		double t2 = t + dt;
-		vec2 i2(A.x + t2 * d.x, A.y + t2 * d.y);
+		vec2 i2(A.x + (float)t2 * d.x, A.y + (float)t2 * d.y);
 		if (t2 < 0 || t2 > 1)
 		{
 			// intersection point is not actually within line segment
@@ -120,19 +133,37 @@ bool lineCircleCollision(vec2 A, vec2 B, BoundingCircle circle)
 	}
 }
 
-bool checkCollision(BoundingBox boundingBox, BoundingCircle boundingCircle)
+vec2 checkCollision(BoundingBox boundingBox, BoundingCircle boundingCircle)
 {
-	//vec2 pos = boundingCircle.center;
-	//if ((boundingBox.topLeft.x < pos.x && pos.x < boundingBox.topRight.x) &&
-	//	(boundingBox.topRight.y < pos.y && pos.y < boundingBox.bottomRight.y))
-	//	return true;
-	if (lineCircleCollision(boundingBox.topLeft, boundingBox.topRight, boundingCircle) ||
-		lineCircleCollision(boundingBox.bottomLeft, boundingBox.bottomRight, boundingCircle) ||
-		lineCircleCollision(boundingBox.topLeft, boundingBox.bottomLeft, boundingCircle) ||
-		lineCircleCollision(boundingBox.topRight, boundingBox.bottomRight, boundingCircle))
-		return true;
+	bool collision = false;
+	vec2 normal;
+	if (lineCircleCollision(boundingBox.topLeft, boundingBox.topRight, boundingCircle)){
+		normal = boundingBox.topRight - boundingBox.topLeft;
+		collision = true;
+	}
+	else if (lineCircleCollision(boundingBox.bottomLeft, boundingBox.bottomRight, boundingCircle)){
+		normal = boundingBox.bottomRight - boundingBox.bottomLeft;
+		collision = true;
+	}
+	else if (lineCircleCollision(boundingBox.topLeft, boundingBox.bottomLeft, boundingCircle)){
+		normal = boundingBox.bottomLeft - boundingBox.topLeft;
+		collision = true;
+	}
+	else if (lineCircleCollision(boundingBox.topRight, boundingBox.bottomRight, boundingCircle)){
+		normal = boundingBox.bottomRight - boundingBox.topRight;
+		collision = true;
+	}
 
-	return false;
+	if (collision){
+		float len = normal.Length();
+		normal.Normalize();
+		float a = normal.x;
+		normal.x = normal.y;
+		normal.y = -a;
+		return normal;
+	}
+	else
+		return vec2(0.0f, 0.0f);
 
 }
 

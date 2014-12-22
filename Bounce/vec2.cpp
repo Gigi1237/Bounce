@@ -1,6 +1,5 @@
 #include "vec2.h"
 
-
 vec2& vec2::Rotate(float angle)
 {
 	angle /= 57.2957f;
@@ -18,7 +17,7 @@ vec2& vec2::Rotate(float angle)
 
 vec2& vec2::RotateAroundPoint(float angle, vec2 origin)
 {
-	float radian = -(angle * M_PI / 180);
+	float radian = -(angle * (float)M_PI / 180);
 	float s = sin(radian);
 	float c = cos(radian);
 
@@ -42,5 +41,10 @@ float distance(vec2 p1, vec2 p2)
 	float x = p1.x - p2.x;
 	float y = p1.y - p2.y;
 	return sqrt((x*x) + (y*y));
+}
+
+float dotProduct(vec2 v1, vec2 v2)
+{
+	return v1.x * v2.x + v1.y * v2.y;
 }
 

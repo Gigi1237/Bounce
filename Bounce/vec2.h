@@ -1,6 +1,9 @@
 #pragma once
 
 #define _USE_MATH_DEFINES
+#define _SCL_SECURE_NO_WARNINGS
+#include <numeric>
+#include <iterator>
 #include <math.h>
 
 
@@ -134,6 +137,11 @@ public:
 		return ((x != v.x) || (y != v.y));
 	}
 
+	float Length(void)
+	{
+		return sqrt((x*x) + (y*y));
+	}
+
 	vec2& Normalize(void)
 	{
 		return (*this /= sqrtf(x * x + y * y));
@@ -145,6 +153,8 @@ public:
 };
 
 float distance(vec2 p1, vec2 p2);
+
+float dotProduct(vec2 v1, vec2 v2);
 
 
 

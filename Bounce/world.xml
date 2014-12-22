@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <world name="TestLevel">
   <PlayerObject>
-    <position x="616.0" y="75"/>
+    <position x="600.0" y="75"/>
     <size x="63.0" y="63.0"/>
     <texture name="ball_red.png"/>
   </PlayerObject>
@@ -11,9 +11,9 @@
     <texture name="background.png"/>
   </Background>
   <Object>
-    <position x="616.0" y="540"/>
+    <position x="570.0" y="540"/>
     <size x="208.0" y="51.0"/>
-    <angle>0</angle>
+    <angle>-45</angle>
     <texture name="Platforms\\Grass_Tile_Half_Round-01.png"/>
   </Object>
 </world>
