@@ -2,14 +2,23 @@
 #include <iostream>
 #include <cstdlib>
 
+float World::gravity = 9.81f * HEIGHT_OF_WINDOW_M;
+
 World::World(IFade2D* lib) : lib(lib)
 {
-	gravity = 9.81f / HEIGHT_OF_WINDOW_M;
-	timeOfUpdate = clock();
+	
+}
+
+World::~World()
+{
+    delete player;
+    delete background;
 }
 
 void World::loadFromXml(std::string xmlPath, std::string texturePath)
 {
+    worldObjects.clear();
+
 	using namespace rapidxml;
 	rapidxml::file<> xmlFile(xmlPath.c_str());
 	xml_document<> xml;
@@ -36,10 +45,6 @@ void World::loadFromXml(std::string xmlPath, std::string texturePath)
 		background = new Background(lib, backGroundData.Size, backGroundData.Position, texturePath + backGroundData.texture, backGroundData.angle);
 }
 
-World::~World()
-{
-}
-
 void World::addObject(Object object)
 {
 	worldObjects.push_back(object);
@@ -63,7 +68,17 @@ void World::update()
 
 void World::setGravity(float g)
 {
-	gravity = g / HEIGHT_OF_WINDOW_M;
+	World::gravity = g * HEIGHT_OF_WINDOW_M;
+}
+
+float World::getGravity()
+{
+    return World::gravity / HEIGHT_OF_WINDOW_M;
+}
+
+void World::initClock()
+{
+    timeOfUpdate = clock();
 }
 
 EntityData getEntityData(rapidxml::xml_node<> *node)

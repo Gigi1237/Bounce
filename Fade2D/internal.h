@@ -11,8 +11,9 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "ShaderHandler.h"
 #include "Fade2D.h"
+#include "ShaderHandler.h"
+#include "InputHandler.h"
 #include "Texture.h"
 
 #ifdef _DEBUG
@@ -21,6 +22,11 @@
 #define SHADERPATH "Resources\\Shaders\\"
 #endif
 
+struct keyHandlerFunc {
+    keyHandlerFunc(int key, keyHandler func) : key(key), func(func) { }
+    int key;
+    keyHandler func;
+};
 
 ///
 /// Class that handles most graphics operations
@@ -34,7 +40,9 @@ public:
 	void prepareScene();
 	void prepareScene(float R, float G, float B);
 	int* getWindowSize();
+    void setKeyPressHandler(letters letter, keyHandler handler);
 	IEntity *newEntity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, float angle = 0);
+    void classKeyHandler(int keyPressed, int action);
 	GLFWwindow* window;
 private:
 	void draw();
@@ -43,6 +51,8 @@ private:
 	GLuint base_vao;
 	int resX;
 	int resY;
+    std::vector<keyHandlerFunc> keyHandlers;
+    void KeyHandler(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 ///
@@ -51,6 +61,7 @@ private:
 class Entity : public IEntity {
 public:
 	Entity(float xLen, float yLen, float xPos, float yPos, std::string texturePath, Fade2D *libray, float angle = 0);
+    ~Entity();
 	void draw();
 	void move(float x, float y);
 	void setPos(float x, float y);

@@ -14,6 +14,7 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 		exit(EXIT_FAILURE);
 	}
 
+
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -22,6 +23,8 @@ Fade2D::Fade2D(int resX, int resY, char* name){
 
 	window = glfwCreateWindow(resX, resY, name, NULL, NULL);
 	glfwMakeContextCurrent(window);
+
+    addClassKeyHandler(this);
 
 
 	glewExperimental = GL_TRUE;
@@ -127,6 +130,20 @@ int* Fade2D::getWindowSize()
 {
 	static int res[] = { resX, resY };
 	return res;
+}
+
+void Fade2D::setKeyPressHandler(letters letter, keyHandler handler)
+{
+    keyHandlers.push_back(keyHandlerFunc(letter, handler));
+}
+
+void Fade2D::classKeyHandler(int keyPressed, int action)
+{
+    for (auto& funcsAndKeus : keyHandlers)
+    {
+        if (keyPressed == funcsAndKeus.key)
+            funcsAndKeus.func(action);
+    }
 }
 
 /// Interface for creating a Fade2D object

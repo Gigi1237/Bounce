@@ -19,7 +19,7 @@ namespace ShaderHandler {
 	unsigned int addShader(shaderType type, char* filePath)
 	{
 		//Adds a new shader to the vector and returns it's id
-		shaders.push_back(*(new Shader(type, readShader(filePath))));
+		shaders.push_back(Shader(type, readShader(filePath)));
 		return shaders.capacity() - 1;
 	}
 
@@ -109,16 +109,18 @@ namespace ShaderHandler {
 		glShaderSource(id, 1, &shader, NULL);
 		glCompileShader(id);
 
-		GLint length;
-		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
-		GLchar* log = (GLchar*)malloc(length);
+        delete shader;
 
-		glGetShaderInfoLog(id, 200, &length, log);
+		//GLint length;
+		//glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
+		//GLchar* log = (GLchar*)malloc(length);
 
-		printf("Log file: ");
-		if (length>1){
-			printf("%s\n", log);
-		}
+		//glGetShaderInfoLog(id, 200, &length, log);
+
+		//printf("Log file: ");
+		//if (length>1){
+		//	printf("%s\n", log);
+		//}
 
 	}
 

@@ -24,6 +24,12 @@ Entity::Entity(float xLen, float yLen, float xPos, float yPos, std::string textu
 	init(library);
 }
 
+
+Entity::~Entity()
+{
+    delete texture;
+}
+
 ///
 /// Draws the entity at it's current position on the sreen
 ///

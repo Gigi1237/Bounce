@@ -32,20 +32,22 @@ class World
 {
 public:
 	World(IFade2D* lib);
+    ~World();
 	void loadFromXml(std::string xmlPath, std::string texturePath);
 	void addObject(Object object);
 	void draw();
 	void update();
+    void initClock();
 	bool isOnScreen(vec2 center, vec2 size, float angle);
-	~World();
-	void setGravity(float g);
+	static void setGravity(float g);
+    static float getGravity();
 private:
 	std::vector<Object> worldObjects;
 	PlayerObject* player;
 	Background* background;
 	IFade2D* lib;
-	float gravity;
 	clock_t timeOfUpdate;
+    static float gravity;
 };
 
 float getNodeAttributeValue(rapidxml::xml_node<> *node, std::string attributeName);

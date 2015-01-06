@@ -151,14 +151,15 @@
   <ItemGroup>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Fade2D.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="ShaderHandler.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="basic.h" />
     <ClInclude Include="Fade2D.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="internal.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="ShaderHandler.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>
