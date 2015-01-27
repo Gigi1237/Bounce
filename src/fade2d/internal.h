@@ -7,19 +7,14 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "basic.h"
-#include <GLFW\glfw3.h>
-#include <glm\glm.hpp>
-#include <glm\gtc\matrix_transform.hpp>
+#include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "ShaderHandler.h"
 #include "Fade2D.h"
 #include "Texture.h"
-
-#ifdef _DEBUG
-#define SHADERPATH "..\\Fade2D\\Shaders\\"
-#else
-#define SHADERPATH "Resources\\Shaders\\"
-#endif
+#include "shaderpath.h"
 
 
 ///
@@ -28,7 +23,7 @@
 class Fade2D : public IFade2D {
 public:
 	friend class Entity;
-	Fade2D(int resX, int resY, char* name);
+	Fade2D(int resX, int resY, const char* name);
 	bool windowShouldClose();
 	void swapBuffer();
 	void prepareScene();

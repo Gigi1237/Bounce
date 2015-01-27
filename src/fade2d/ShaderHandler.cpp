@@ -3,7 +3,7 @@
 /// Group of functions dedicated to handling of shaders
 namespace ShaderHandler {
 
-	static const char* readShader(char* path);
+	static const char* readShader(const char* path);
 	static std::vector<Shader> shaders;
 	static std::vector<GLuint> programs;
 	static unsigned int currentProgram;
@@ -16,7 +16,7 @@ namespace ShaderHandler {
 	/// @param filePath Filepath of the shader
 	///
 	/// @return ID of the shader
-	unsigned int addShader(shaderType type, char* filePath)
+	unsigned int addShader(shaderType type, const char* filePath)
 	{
 		//Adds a new shader to the vector and returns it's id
 		shaders.push_back(*(new Shader(type, readShader(filePath))));
@@ -124,7 +124,7 @@ namespace ShaderHandler {
 
 
 	// Private functions which reads shader from file
-	const char * readShader(char* path)
+	const char * readShader(const char* path)
 	{
 		// Reads the shader into a string
 		std::ifstream shader;

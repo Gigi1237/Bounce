@@ -1,0 +1,2 @@
+add_subdirectory(fade2d)
+add_subdirectory(bounce)

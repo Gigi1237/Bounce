@@ -22,7 +22,7 @@ private:
 	shaderType type;
 };
 
-unsigned int addShader(shaderType type, char* filePath);
+unsigned int addShader(shaderType type, const char* filePath);
 unsigned int addProgram();
 void bindProgram(unsigned int vertexShader, unsigned int fragmentShader);
 void bindProgram(unsigned int program, unsigned int vertexShader, unsigned int fragmentShader);

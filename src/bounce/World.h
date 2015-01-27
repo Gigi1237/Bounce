@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Object.h"
-#include "rapidxml\rapidxml.hpp"
-#include "rapidxml\rapidxml_utils.hpp"
+#include <rapidxml.hpp>
+#include <rapidxml_utils.hpp>
 
 #define DEFAULT_TEXTURE "default.png"
 #define COLLISION_TEST_DIST 250
@@ -49,6 +49,6 @@ private:
 };
 
 float getNodeAttributeValue(rapidxml::xml_node<> *node, std::string attributeName);
-bool getBoolAttribute(rapidxml::xml_node<> * node, std::string attributeName, bool default = false);
+bool getBoolAttribute(rapidxml::xml_node<> * node, std::string attributeName, bool defaultValue = false);
 bool isOnScreen(vec2 windowSize, vec2 center);
 EntityData getEntityData(rapidxml::xml_node<>* node);

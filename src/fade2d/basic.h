@@ -7,7 +7,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
-#include <Windows.h>
-#include <GL\glew.h>
+//#include <Windows.h>
+#include <GL/glew.h>
 
 #endif

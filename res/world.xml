@@ -13,13 +13,13 @@
   <Object>
     <position x="616.0" y="540"/>
     <size x="208.0" y="51.0"/>
-    <angle>-30</angle>
-    <texture name="Platforms\\Grass_Tile_Half_Round-01.png"/>
+    <angle>0</angle>
+    <texture name="Platforms/Grass_Tile_Half_Round-01.png"/>
   </Object>
   <Object>
     <position x="900" y="200"/>
     <size x="114.0" y="149.0"/>
     <angle>0</angle>
-    <texture name="Platforms\\Exit_Door.png"/>
+    <texture name="Platforms/Exit_Door.png"/>
   </Object>
 </world>

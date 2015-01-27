@@ -2,12 +2,15 @@
 #define Fade2D_TEST
 
 //Define Needed headers
+#ifdef WIN32
 #ifndef FADE2D_EXPORT
 #define FADE2D_EXPORT __declspec(dllexport)
 #else
 #define FADE2D_EXPORT __declspec(dllimport)
 #endif
-
+#else
+#define FADE2D_EXPORT
+#endif
 class IEntity;
 
 #include <string>
@@ -40,6 +43,6 @@ public:
 	virtual float getAngle() = 0;
 };
 
-FADE2D_EXPORT IFade2D* new_IFade2d(int resX, int resY, char* name);
+FADE2D_EXPORT IFade2D* new_IFade2d(int resX, int resY, const char* name);
 
 #endif

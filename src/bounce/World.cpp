@@ -123,7 +123,7 @@ float getNodeAttributeValue(rapidxml::xml_node<> *node, std::string attributeNam
 		return 0;
 }
 
-bool getBoolAttribute(rapidxml::xml_node<> *node, std::string attributeName, bool default)
+bool getBoolAttribute(rapidxml::xml_node<> *node, std::string attributeName, bool defaultValue)
 {
 	using namespace rapidxml;
 	xml_attribute<> *attrib = node->first_attribute(attributeName.c_str());
@@ -135,10 +135,10 @@ bool getBoolAttribute(rapidxml::xml_node<> *node, std::string attributeName, boo
 		else if (value == "false")
 			return false;
 		else
-			return default;
+			return defaultValue;
 	}
 	else
-		return default;
+		return defaultValue;
 }
 
 bool isOnScreen(vec2 windowSize, vec2 center)

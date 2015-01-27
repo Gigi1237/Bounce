@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\Fade2D\Fade2D.h"
+#include <Fade2D.h>
 #include "Bounce.h"
 #include "World.h"
 #include "vec2.h"
@@ -61,7 +61,7 @@ protected:
 class PlayerObject : public Object
 {
 public:
-	PlayerObject::PlayerObject(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle = 0.f);
+	PlayerObject(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle = 0.f);
 	void move(vec2 mov);
 	void moveTo(vec2 pos);
 	void update(vec2 accel, double timeStep, std::vector<Object> worldObjects);

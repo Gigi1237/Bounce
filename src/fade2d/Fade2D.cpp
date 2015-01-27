@@ -7,7 +7,7 @@
 /// @param resY Vertical resolution of the desired window
 /// @param name Name of the desired window
 ///
-Fade2D::Fade2D(int resX, int resY, char* name){
+Fade2D::Fade2D(int resX, int resY, const char* name){
 	//Start GL context and open windows
 	if (!glfwInit()) {
 		fprintf(stderr, "ERROR: could not start GLFW3\n");
@@ -135,6 +135,6 @@ int* Fade2D::getWindowSize()
 /// @param resY Vertical resolution
 /// @param name Name of the window
 ///
-IFade2D* new_IFade2d(int resX, int resY, char* name){
+IFade2D* new_IFade2d(int resX, int resY, const char* name){
 	return new Fade2D(resX, resY, name);
 }
