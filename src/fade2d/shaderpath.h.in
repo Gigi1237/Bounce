@@ -1,5 +1,5 @@
 #ifdef _DEBUG
 #define SHADERPATH "${CMAKE_SOURCE_DIR}/res/Shaders/"
 #else
-#define SHADERPATH "Resources\\Shaders\\"
+#define SHADERPATH "Resources/Shaders/"
 #endif

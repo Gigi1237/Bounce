@@ -1,5 +1,5 @@
 #include "Bounce.h"
-
+#include <iostream>
 int main()
 {
 	IFade2D *graphics = new_IFade2d(1280, 720, "Bounce!");

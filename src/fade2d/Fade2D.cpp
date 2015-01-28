@@ -21,11 +21,31 @@ Fade2D::Fade2D(int resX, int resY, const char* name){
 	glfwWindowHint(GLFW_SAMPLES, 16);
 
 	window = glfwCreateWindow(resX, resY, name, NULL, NULL);
+	if(window == NULL) {
+  	  std::cerr << "Failed to open GLFW window. Are your drivers up-to-date ?" << std::endl;
+  	  glfwTerminate();
+
+  	  exit(EXIT_FAILURE);
+	}
+
+
 	glfwMakeContextCurrent(window);
+	if(!glfwGetCurrentContext()) {
+   	 std::cerr << "Couldn't create OpenGL context" << std::endl;
+   	 exit(EXIT_FAILURE);
+	}
 
 
 	glewExperimental = GL_TRUE;
-	glewInit();
+	//glewInit();
+
+        GLenum err = glewInit();
+        if (err != GLEW_OK)
+          std::cout << "ERROR 1: " << glewGetErrorString(err);
+          //exit(1); // or handle the error in a nicer way
+        if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
+          std::cout << "ERROR 2: " << glewGetErrorString(err);
+          //exit(1); // or handle the error in a nicer way
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

@@ -115,8 +115,8 @@ namespace ShaderHandler {
 
 		glGetShaderInfoLog(id, 200, &length, log);
 
-		printf("Log file: ");
 		if (length>1){
+		        printf("Log file: ");
 			printf("%s\n", log);
 		}
 

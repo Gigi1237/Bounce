@@ -4,8 +4,8 @@
 #define XML_PATH "${CMAKE_SOURCE_DIR}/res/"
 #define TEXTURE_PATH "${CMAKE_SOURCE_DIR}/res/Textures/"
 #else
-#define XML_PATH "Resources\\"
-#define TEXTURE_PATH "Resources\\Textures\\"
+#define XML_PATH "Resources/"
+#define TEXTURE_PATH "Resources/Textures/"
 #endif
 
 #include <vector>
