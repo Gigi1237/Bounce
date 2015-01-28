@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<world name="TestLevel">
+  <PlayerObject>
+    <position x="640.0" y="75"/>
+    <size x="63.0" y="63.0"/>
+    <texture name="ball_red.png"/>
+  </PlayerObject>
+  <Background>
+   <position x="640.0" y="360.0"/>
+    <size x="1280" y="720.0"/>
+    <texture name="background.png"/>
+  </Background>
+  <Object>
+    <position x="616.0" y="540"/>
+    <size x="208.0" y="51.0"/>
+    <angle>0</angle>
+    <texture name="Platforms/Grass_Tile_Half_Round-01.png"/>
+  </Object>
+  <Object>
+    <position x="900" y="200"/>
+    <size x="114.0" y="149.0"/>
+    <angle>0</angle>
+    <texture name="Platforms/Exit_Door.png"/>
+  </Object>
+</world>
