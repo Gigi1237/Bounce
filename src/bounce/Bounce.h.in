@@ -1,6 +1,6 @@
 #pragma once
 
-#ifdef _DEBUG
+#if defined(_DEBUG) || defined(NDEBUG)
 #define XML_PATH "${CMAKE_SOURCE_DIR}/res/"
 #define TEXTURE_PATH "${CMAKE_SOURCE_DIR}/res/Textures/"
 #else

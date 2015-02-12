@@ -1,6 +1,6 @@
 #include "Bounce.h"
 #include <iostream>
-#include <intrin.h>
+//#include <intrin.h> - Not needed on linux
 
 World *world;
 

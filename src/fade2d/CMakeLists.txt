@@ -14,6 +14,10 @@ file(GLOB src *.h *.cpp)
 
 add_library(Fade2D ${src} ${CMAKE_BINARY_DIR}/src/fade2d/shaderpath.h)
 
+if( UNIX )
+    target_compile_features(Fade2D PRIVATE cxx_range_for)
+endif()
+
 add_dependencies(Fade2D glfw)
 
 target_link_libraries(Fade2D glfw ${GLEW_LIBRARY} ${GLFW_LIBRARIES})
