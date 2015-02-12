@@ -22,4 +22,11 @@ add_dependencies(Fade2D glfw)
 
 target_link_libraries(Fade2D glfw ${GLEW_LIBRARY} ${GLFW_LIBRARIES})
 
+#if ( CMAKE_BUILD_TYPE MATCHES Release)
+    add_custom_command(TARGET Fade2D PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                   ${CMAKE_SOURCE_DIR}/res/Shaders $<TARGET_FILE_DIR:Fade2D>/Resources/Shaders)
+#endif()
+
+
 

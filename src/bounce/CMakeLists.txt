@@ -20,3 +20,10 @@ endif()
 add_dependencies(Bounce Fade2D)
 
 target_link_libraries(Bounce Fade2D)
+
+if ( CMAKE_BUILD_TYPE MATCHES Release)
+    add_custom_command(TARGET Bounce PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                   ${CMAKE_SOURCE_DIR}/res $<TARGET_FILE_DIR:Bounce>/Resources)
+endif()
+

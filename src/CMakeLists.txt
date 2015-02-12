@@ -20,7 +20,6 @@ if( MSVC )
         endforeach()
 endif()
 
-message( ${CMAKE_CXX_FLAGS_RELEASE} )
-
 add_subdirectory(fade2d)
 add_subdirectory(bounce)
+
