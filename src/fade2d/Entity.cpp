@@ -17,7 +17,7 @@ Entity::Entity(float xLen, float yLen, float xPos, float yPos, std::string textu
 	size = glm::vec2(xLen, yLen);
 	scaleMatrix = glm::scale(glm::mat4(), glm::vec3(xLen, yLen, 1));
 	translationMatrix = glm::translate(glm::mat4(), glm::vec3(pos, 0));
-	rotationMatrix = glm::rotate(glm::mat4(), angle, glm::vec3(0.f, 0.f, -1.f));
+	rotationMatrix = glm::rotate(glm::mat4(), glm::radians(angle), glm::vec3(0.f, 0.f, -1.f));
 
 	this->texture = new Texture(texturePath);
 
@@ -64,7 +64,7 @@ void Entity::setPos(float x, float y){
 void Entity::rotate(float angle)
 {
 	this->angle += angle;
-	rotationMatrix = glm::rotate(rotationMatrix, angle, glm::vec3(0.f, 0.f, -1.f));
+	rotationMatrix = glm::rotate(rotationMatrix, glm::radians(angle), glm::vec3(0.f, 0.f, -1.f));
 }
 
 ///
@@ -72,7 +72,7 @@ void Entity::rotate(float angle)
 ///
 void Entity::setAngle(float angle){
 	this->angle = angle;
-	rotationMatrix = glm::rotate(glm::mat4(), angle, glm::vec3(0.f, 0.f, -1.f));
+	rotationMatrix = glm::rotate(glm::mat4(), glm::radians(angle), glm::vec3(0.f, 0.f, -1.f));
 }
 
 ///
