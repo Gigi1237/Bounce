@@ -12,8 +12,10 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <time.h>
+#include <chrono>
 
-#define HEIGHT_OF_WINDOW_M 4.f
+
+#define PIXEL_PER_METER 360.f
 
 class Object;
 class PlayerObject;
@@ -45,8 +47,9 @@ private:
 	std::vector<Object> worldObjects;
 	PlayerObject* player;
 	Background* background;
-	IFade2D* lib;
 	clock_t timeOfUpdate;
+    std::chrono::steady_clock::time_point lastUpdate;
+	IFade2D* lib;
     static float gravity;
 };
 

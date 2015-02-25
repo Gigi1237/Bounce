@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 
-float World::gravity = 9.81f * HEIGHT_OF_WINDOW_M;
+float World::gravity = 9.81f * PIXEL_PER_METER;
 
 World::World(IFade2D* lib) : lib(lib)
 {
@@ -61,24 +61,27 @@ void World::draw()
 
 void World::update()
 {
-	clock_t timeStep = (clock() - timeOfUpdate);
-	player->update(vec2(0.f, gravity), (float)timeStep/CLOCKS_PER_SEC, worldObjects);
-	timeOfUpdate = clock();
+    std::chrono::steady_clock::time_point tStep = std::chrono::steady_clock::now();
+    long int timeStep = std::chrono::duration_cast<std::chrono::milliseconds>(tStep - lastUpdate).count();
+
+    lastUpdate = std::chrono::steady_clock::now(); 
+	player->update(vec2(0.f, gravity), ((float)timeStep / 1000.f), worldObjects);
 }
 
 void World::setGravity(float g)
-{
-	World::gravity = g * HEIGHT_OF_WINDOW_M;
+{ 
+	World::gravity = g * PIXEL_PER_METER;
 }
 
 float World::getGravity()
 {
-    return World::gravity / HEIGHT_OF_WINDOW_M;
+    return World::gravity / PIXEL_PER_METER;
 }
 
 void World::initClock()
 {
     timeOfUpdate = clock();
+    lastUpdate = std::chrono::steady_clock::now();
 }
 
 EntityData getEntityData(rapidxml::xml_node<> *node)

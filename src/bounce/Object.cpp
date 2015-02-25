@@ -1,5 +1,5 @@
 #include "Object.h"
-
+#include <iostream>
 
 Object::Object(IFade2D* lib, vec2 Len, vec2 Pos, std::string texturePath, float angle) : boundingBox(Pos, Len, angle)
 {
@@ -33,10 +33,10 @@ void PlayerObject::moveTo(vec2 pos)
 	desiredPos = pos;
 }
 
-void PlayerObject::update(vec2 accel, double timeStep, std::vector<Object> worldObjects)
+void PlayerObject::update(vec2 accel, float timeStep, std::vector<Object> worldObjects)
 {
-	speed += accel * (float)timeStep;
-	desiredPos += speed;
+	speed += (accel * timeStep);
+	desiredPos += (speed * timeStep);
 	boundingCircle.center = desiredPos;
 	bool collide = false;
 	for (auto &object : worldObjects)
@@ -59,7 +59,7 @@ void PlayerObject::update(vec2 accel, double timeStep, std::vector<Object> world
 
 	if (!isOnScreen(vec2(1280, 720), boundingCircle.center))
 	{
-		vec2 a(600, 75);
+		vec2 a(600, 0);
 		entity->setPos(a.x, a.y);
 		position = a;
 		desiredPos = position;
